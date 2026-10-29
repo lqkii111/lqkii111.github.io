@@ -79,7 +79,7 @@
   },
   {
    "id": "studio",
-   "file": "File:Studio apartment in Finland.jpg"
+   "file": "File:Les chambres de bonnes.jpg"
   },
   {
    "id": "appart",
@@ -91,7 +91,7 @@
   },
   {
    "id": "loft",
-   "file": "File:Hayloft Apartment.jpg"
+   "file": "File:Bushwick Brooklyn December 2025 003.jpg"
   },
   {
    "id": "villa",
@@ -165,100 +165,42 @@
   {
    "id": "maisontokyo",
    "q": [
-    "Japanese house garden Tokyo",
-    "Kyu Asakura House garden",
-    "Japanese house with garden"
+    "Former Asakura Residence",
+    "旧朝倉家住宅",
+    "Tokyo garden house -Shofuso"
    ]
   },
   {
    "id": "villamiami",
-   "q": [
-    "Miami Beach waterfront house",
-    "Miami Beach mansion",
-    "Biscayne Bay house"
-   ]
+   "file": "File:Gianni versace miami home.JPG"
   },
   {
    "id": "villatropez",
-   "q": [
-    "villa Saint-Tropez",
-    "villa Ramatuelle",
-    "villa Gassin"
-   ]
+   "file": "File:Vue depuis la Villa Belrose à Gassin.jpg"
   },
   {
    "id": "villadubai",
-   "q": [
-    "Palm Jumeirah villa",
-    "Palm Jumeirah villas",
-    "Palm Jumeirah frond"
-   ]
+   "file": "File:Jumeirah Palm-Dubai4067.JPG"
   },
   {
    "id": "villala",
-   "q": [
-    "Beverly Hills mansion",
-    "Beverly Hills house",
-    "Greystone Mansion Beverly Hills"
-   ]
+   "file": "File:Greystone Mansion.JPG"
   },
   {
    "id": "pentdubai",
-   "q": [
-    "Dubai Marina skyline",
-    "Dubai Marina towers",
-    "Dubai Marina night"
-   ]
+   "file": "File:Dubai Marina Aug2012.jpg"
   },
   {
    "id": "penttokyo",
-   "q": [
-    "Tokyo skyline Roppongi",
-    "Roppongi Hills view Tokyo Tower",
-    "Tokyo skyline night"
-   ]
+   "file": "File:Tokyo Tower, Minato City.jpg"
   },
   {
    "id": "pentny",
-   "q": [
-    "Central Park skyline Billionaires' Row",
-    "Central Park South skyline",
-    "Manhattan skyline Central Park"
-   ]
+   "file": "File:Billionaires' Row 2020.jpg"
   },
   {
    "id": "pentmonaco",
-   "q": [
-    "Monaco harbour panorama",
-    "Monte Carlo skyline",
-    "Port Hercule Monaco"
-   ]
-  },
-  {
-   "id": "loft_alt",
-   "q": [
-    "loft New York",
-    "SoHo loft",
-    "Brooklyn loft"
-   ]
-  },
-  {
-   "id": "loft_info",
-   "q": [
-    "Hayloft Apartment"
-   ],
-   "min_w": 100,
-   "min_h": 100,
-   "min_ratio": 0.3
-  },
-  {
-   "id": "studio_info",
-   "q": [
-    "Les chambres de bonnes"
-   ],
-   "min_w": 100,
-   "min_h": 100,
-   "min_ratio": 0.3
+   "file": "File:Panorama von Monaco-La Turbie.jpg"
   }
  ]
 }
