@@ -25,18 +25,16 @@ villa : déjà à jour
 penthouse : déjà à jour
 manoir : déjà à jour
 ile : déjà à jour
-digitix : OK 800×800, 51 Ko, CC BY-SA 4.0, Multicherry
-chrono : OK 800×860, 71 Ko, CC BY-SA 4.0, Pittigrilli
-moonswatch : OK 800×532, 23 Ko, CC BY-SA 4.0, Bricetofly
-heureka : OK 800×872, 90 Ko, CC BY-SA 3.0, Pinback66
-santos : OK 800×800, 33 Ko, CC BY-SA 4.0, EMore98
-speedmaster : OK 800×600, 56 Ko, CC BY 2.0, Daniel Zimmermann from Bayern, Deutschland (Germany)
-couronne : OK 800×600, 30 Ko, CC BY-SA 3.0, Dr.K.
-bigbang : OK 800×532, 51 Ko, CC BY-SA 3.0 pl, When reusing, please credit me as author: Adam Kliczek, http://memoriesstay.com ( CC-BY-SA
-daytona : OK 800×532, 39 Ko, CC BY-SA 3.0, Alesili
-daydate : OK 800×544, 59 Ko, CC0, Kevin Sweeney
-royaloak : OK 800×811, 70 Ko, CC BY-SA 4.0, Clyde94
-complication : 2 candidates pour « Patek Philippe Nautilus » (6 résultats)
-complication : 1 candidates pour « Patek Philippe 5711 » (2 résultats)
-complication : 0 candidates pour « Nautilus 5711 » (2 résultats)
-squelette : OK 800×533, 22 Ko, CC BY-SA 4.0, Y.Leclercq
+digitix : déjà à jour
+chrono : déjà à jour
+moonswatch : déjà à jour
+heureka : déjà à jour
+santos : déjà à jour
+speedmaster : déjà à jour
+couronne : déjà à jour
+bigbang : déjà à jour
+daytona : déjà à jour
+daydate : déjà à jour
+royaloak : déjà à jour
+complication : OK 800×1001, 43 Ko, CC BY-SA 4.0, Patek Philippe SA
+squelette : déjà à jour
