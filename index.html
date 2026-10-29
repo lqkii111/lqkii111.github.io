@@ -289,6 +289,30 @@ p { margin: 0; }
 .tile.xl { width: 96px; height: 96px; flex: none; border-radius: 18px; }
 .tile.xl .emo { font-size: 54px; }
 
+/* real photos (shop cards, lists, item sheet) */
+.tile.photo { background: var(--rail); }
+.tile.photo .emo { position: absolute; inset: 0; display: grid; place-items: center; opacity: .45; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tile.photo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1); }
+.tile.photo.r-rare::after { box-shadow: inset 0 0 0 2px rgba(127, 178, 255, .75); }
+.tile.photo.r-epique::after { box-shadow: inset 0 0 0 2px rgba(199, 155, 255, .8); }
+.tile.photo.r-legend::after { box-shadow: inset 0 0 0 2px rgba(242, 193, 78, .9); }
+.tile.photo.r-myth::after { box-shadow: inset 0 0 0 2px rgba(255, 122, 107, .9); }
+.is-photo { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.is-photo .ph { position: relative; display: block; overflow: hidden; width: 100%; max-width: 100%; aspect-ratio: 16 / 10; border-radius: 16px; background: var(--rail); }
+.is-photo .ph.r-rare { box-shadow: 0 0 0 2px rgba(127, 178, 255, .6); }
+.is-photo .ph.r-epique { box-shadow: 0 0 0 2px rgba(199, 155, 255, .65); }
+.is-photo .ph.r-legend { box-shadow: 0 0 0 2px rgba(242, 193, 78, .75); }
+.is-photo .ph.r-myth { box-shadow: 0 0 0 2px rgba(255, 122, 107, .75); }
+.is-photo .emo { position: absolute; inset: 0; display: grid; place-items: center; font-size: 64px; }
+.is-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.is-photo figcaption { font-size: 11px; line-height: 1.4; color: var(--faint); }
+.is-photo figcaption a, .credits a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.credits { display: flex; flex-direction: column; gap: 12px; }
+.credits ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.credits li { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+.credits li span { font-size: 12px; line-height: 1.4; color: var(--faint); }
+
 /* item sheet */
 .item-sheet { display: flex; flex-direction: column; gap: 14px; }
 .is-hero { display: flex; align-items: center; gap: 14px; }
@@ -901,6 +925,7 @@ path.w-rouge, path.w-noir, path.w-vert { stroke: var(--brass-lo); stroke-width: 
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <script>
+const PHOTO_CREDITS = {"appart":{"author":"Hypersite","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Le_Plessis-Robinson-02.jpg"},"berline":{"author":"Alexander-93","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Tesla_Model_3_(2023)_Autofr%C3%BChling_Ulm_IMG_9282.jpg"},"citadine":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Renault_Clio_V_Genf_2019_1Y7A5590.jpg"},"classec":{"author":"© M 93","license":"CC BY-SA 3.0 de","license_url":"https://creativecommons.org/licenses/by-sa/3.0/de/deed.en","source":"https://commons.wikimedia.org/wiki/File:Mercedes-Benz_C_300_d_AMG_Line_(W_206)_%E2%80%93_f_10032024.jpg"},"cullinan":{"author":"Jengtingchen","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Rolls-Royce_Cullinan_001.jpg"},"f296":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Ferrari_296_GTB_1X7A6377.jpg"},"g63":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Mercedes-AMG_G_63_(2018)_IMG_4370.jpg"},"golfgti":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_GTI_Clubsport_45_1X7A0298.jpg"},"huracan":{"author":"Matti Blume","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Lamborghini_Huracan_Evo,_GIMS_2019,_Le_Grand-Saconnex_(GIMS1010).jpg"},"hypercar":{"author":"MrWalkr","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Bugatti_Chiron_Royal_Blue.jpg"},"ile":{"author":"Msmayer8","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Aerial_of_Coffee_Caye_from_the_south.jpg"},"jet":{"author":"Acroterion","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Embraer_Phenom_300_N235EE_FDK_MD2.jpg"},"loft":{"author":"Сергій111111","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Hayloft_Apartment.jpg"},"m4":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:BMW_M4_(G82)_Competition_1X7A0305.jpg"},"maison":{"author":"Mbzt","license":"CC BY-SA 3.0","license_url":"https://creativecommons.org/licenses/by-sa/3.0","source":"https://commons.wikimedia.org/wiki/File:P1240507_Paris_V_jardin_des_Plantes_maison_Cuvier_rwk.jpg"},"manoir":{"author":"Pimprenel","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Cambremer,_manoir_de_Cantepie_vu_du_sud.jpg"},"p208":{"author":"© M 93","license":"CC BY-SA 3.0 de","license_url":"https://creativecommons.org/licenses/by-sa/3.0/de/deed.en","source":"https://commons.wikimedia.org/wiki/File:Peugeot_208_PureTech_130_EAT8_Allure_GT-Line_(II)_%E2%80%93_f_17102021.jpg"},"penthouse":{"author":"Dupont Circle Hotel","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:The-Dupont-Circle-Hotel-Washington-Signature-Terrace-Suite.jpg"},"revuelto":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Lamborghini_Revuelto_DSC_6985.jpg"},"scooter":{"author":"Khaosaming","license":"CC BY-SA 3.0","license_url":"https://creativecommons.org/licenses/by-sa/3.0","source":"https://commons.wikimedia.org/wiki/File:Honda_PCX125_2011.JPG"},"sportive":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Porsche_992_Carrera_S_coupe_IMG_5838.jpg"},"studio":{"author":"Aaaatu","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Studio_apartment_in_Finland.jpg"},"supercar":{"author":"Alexander Migl","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Porsche_992_GT3_RS_MYLE_Festival_2025_DSC_9586.jpg"},"trottinette":{"author":"Axel.206","license":"CC0","license_url":"","source":"https://commons.wikimedia.org/wiki/File:Xiaomi_Mijia_M365_blanche_1er_juillet_2024.jpg"},"velo":{"author":"Todd Fahrner","license":"CC BY-SA 2.0","license_url":"https://creativecommons.org/licenses/by-sa/2.0","source":"https://commons.wikimedia.org/wiki/File:Dutch_bicycle_with_front_carrier_in_front_of_house.jpg"},"villa":{"author":"Aldeko","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:La_villa_Empain-Piscine-Brussels.jpg"},"yacht":{"author":"Ecuapromo","license":"CC BY-SA 4.0","license_url":"https://creativecommons.org/licenses/by-sa/4.0","source":"https://commons.wikimedia.org/wiki/File:Stella-maris-luxury-yacht-gallery-10.jpg"}};
 /* ============================================================
    FLAMBEUR — game data (items, jobs, titles, contacts)
    ============================================================ */
@@ -955,16 +980,25 @@ const RESALE = {
    rs = resale profile (absent = cannot be sold), fx = CSS filter tint for the emoji */
 const ITEMS = [
   // Véhicules
-  { id: 'velo', cat: 'vehicules', name: 'Vélo d’occasion', e: '🚲', price: 90, pr: 1, rar: 'commun', line: 'roues', tier: 1, rs: 'roues', d: 'Des freins qui couinent et des mollets en acier. Parfait pour livrer.' },
+  { id: 'velo', cat: 'vehicules', name: 'Vélo de ville', e: '🚲', price: 90, pr: 1, rar: 'commun', line: 'roues', tier: 1, rs: 'roues', d: 'D’occasion, avec un panier et des freins qui couinent. Parfait pour livrer.' },
   { id: 'trottinette', cat: 'vehicules', name: 'Trottinette électrique', e: '🛴', price: 390, pr: 2, rar: 'commun', line: 'roues', tier: 2, rs: 'roues', d: '25 km/h de liberté, et la pluie dans la figure.' },
-  { id: 'scooter', cat: 'vehicules', name: 'Scooter 125', e: '🛵', price: 2300, pr: 5, rar: 'commun', line: 'roues', tier: 3, rs: 'roues', d: 'Le roi des embouteillages.' },
-  { id: 'citadine', cat: 'vehicules', name: 'Rimini Piccola', e: '🚗', price: 7900, pr: 10, rar: 'commun', line: 'voiture', tier: 1, car: true, rs: 'auto', d: 'Citadine italienne increvable. Se gare dans un mouchoir de poche.' },
-  { id: 'berline', cat: 'vehicules', name: 'Kaiser B5', e: '🚘', price: 34000, pr: 22, rar: 'rare', line: 'voiture', tier: 2, car: true, rs: 'auto', d: 'Berline allemande : cuir, silence et régulateur adaptatif.' },
-  { id: 'sportive', cat: 'vehicules', name: 'Falco GT', e: '🏎️', fx: 'hue-rotate(205deg) saturate(1.3)', price: 145000, pr: 50, rar: 'epique', line: 'voiture', tier: 3, car: true, rs: 'auto', d: '450 chevaux. Le voisin a fermé ses volets.' },
-  { id: 'supercar', cat: 'vehicules', name: 'Cavallo Rosso', e: '🏎️', price: 320000, pr: 95, rar: 'epique', line: 'voiture', tier: 4, car: true, rs: 'auto', d: 'Rouge, forcément. De 0 à 100 km/h en 2,9 secondes.' },
-  { id: 'hypercar', cat: 'vehicules', name: 'Hyperion W16', e: '🏎️', fx: 'grayscale(1) brightness(.62) contrast(1.6)', price: 2900000, pr: 280, rar: 'legendaire', line: 'voiture', tier: 5, car: true, rs: 'auto', d: 'Seize cylindres, 420 km/h et trente exemplaires au monde.' },
-  { id: 'yacht', cat: 'vehicules', name: 'Yacht Poséidon 60 m', e: '🛥️', price: 9500000, pr: 650, rar: 'legendaire', line: 'yacht', tier: 1, rs: 'luxeTransport', d: 'Héliport, jacuzzi et douze membres d’équipage. Amarré à Monaco.' },
-  { id: 'jet', cat: 'vehicules', name: 'Jet privé Stratos', e: '🛩️', price: 14000000, pr: 850, rar: 'legendaire', line: 'jet', tier: 1, rs: 'luxeTransport', d: 'Paris–New York sans file d’attente ni voisin qui ronfle.' },
+  { id: 'scooter', cat: 'vehicules', name: 'Honda PCX 125', e: '🛵', price: 3600, pr: 5, rar: 'commun', line: 'roues', tier: 3, rs: 'roues', d: 'Le scooter urbain par excellence : économe, fiable, et il se faufile partout.' },
+  { id: 'citadine', cat: 'vehicules', name: 'Renault Clio', e: '🚗', price: 7900, pr: 10, rar: 'commun', line: 'voiture', tier: 1, car: true, rs: 'auto', d: 'D’occasion, 90 000 km au compteur. La voiture préférée des Français démarre à tous les coups.' },
+  { id: 'p208', cat: 'vehicules', name: 'Peugeot 208', e: '🚗', price: 21500, pr: 14, rar: 'commun', line: 'voiture', tier: 1, car: true, rs: 'auto', d: 'Neuve, avec le petit volant et le compteur en 3D. Ça sent encore le plastique neuf.' },
+  { id: 'berline', cat: 'vehicules', name: 'Tesla Model 3', e: '🚘', price: 40000, pr: 22, rar: 'rare', line: 'voiture', tier: 2, car: true, rs: 'auto', d: '100 % électrique, un seul grand écran au milieu et des mises à jour à distance.' },
+  { id: 'golfgti', cat: 'vehicules', name: 'Volkswagen Golf GTI', e: '🚘', price: 48000, pr: 26, rar: 'rare', line: 'voiture', tier: 2, car: true, rs: 'auto', d: 'La compacte sportive de référence depuis 1976, avec ses sièges à carreaux.' },
+  { id: 'classec', cat: 'vehicules', name: 'Mercedes-Benz Classe C', e: '🚘', price: 52000, pr: 28, rar: 'rare', line: 'voiture', tier: 2, car: true, rs: 'auto', d: 'Cuir, silence et l’étoile sur le capot. Tes clients VTC vont adorer.' },
+  { id: 'm4', cat: 'vehicules', name: 'BMW M4 Competition', e: '🏎️', price: 115000, pr: 45, rar: 'epique', line: 'voiture', tier: 3, car: true, rs: 'auto', d: 'Six cylindres biturbo et plus de 500 ch. Le voisin a fermé ses volets.' },
+  { id: 'sportive', cat: 'vehicules', name: 'Porsche 911 Carrera', e: '🏎️', price: 138000, pr: 52, rar: 'epique', line: 'voiture', tier: 3, car: true, rs: 'auto', d: 'L’icône de Stuttgart, moteur à l’arrière depuis 1963.' },
+  { id: 'g63', cat: 'vehicules', name: 'Mercedes-AMG G 63', e: '🚙', price: 220000, pr: 70, rar: 'epique', line: 'voiture', tier: 3, car: true, rs: 'auto', d: 'Le 4×4 carré des stars : V8 biturbo et portières qui claquent comme un coffre-fort.' },
+  { id: 'huracan', cat: 'vehicules', name: 'Lamborghini Huracán', e: '🏎️', price: 265000, pr: 90, rar: 'epique', line: 'voiture', tier: 4, car: true, rs: 'auto', d: 'V10 atmosphérique et carrosserie en lame de rasoir. On l’entend arriver de loin.' },
+  { id: 'supercar', cat: 'vehicules', name: 'Porsche 911 GT3 RS', e: '🏎️', price: 285000, pr: 100, rar: 'epique', line: 'voiture', tier: 4, car: true, rs: 'auto', d: 'Aileron géant, moteur atmosphérique de 525 ch qui monte à 9 000 tr/min. Taillée pour le circuit.' },
+  { id: 'f296', cat: 'vehicules', name: 'Ferrari 296 GTB', e: '🏎️', price: 295000, pr: 105, rar: 'epique', line: 'voiture', tier: 4, car: true, rs: 'auto', d: 'V6 hybride de 830 ch. Le cheval cabré, branché sur secteur.' },
+  { id: 'cullinan', cat: 'vehicules', name: 'Rolls-Royce Cullinan', e: '🚙', price: 400000, pr: 130, rar: 'epique', line: 'voiture', tier: 4, car: true, rs: 'auto', d: 'Un salon roulant de 2,7 tonnes, avec la statuette Spirit of Ecstasy sur le capot.' },
+  { id: 'revuelto', cat: 'vehicules', name: 'Lamborghini Revuelto', e: '🏎️', price: 550000, pr: 170, rar: 'legendaire', line: 'voiture', tier: 5, car: true, rs: 'auto', d: 'V12 hybride de 1 015 ch : le taureau le plus puissant de l’histoire de la marque.' },
+  { id: 'hypercar', cat: 'vehicules', name: 'Bugatti Chiron', e: '🏎️', price: 3000000, pr: 300, rar: 'legendaire', line: 'voiture', tier: 5, car: true, rs: 'auto', d: 'Seize cylindres, 1 500 ch et plus de 400 km/h. Il n’en existe que 500.' },
+  { id: 'jet', cat: 'vehicules', name: 'Embraer Phenom 300', e: '🛩️', price: 10500000, pr: 600, rar: 'legendaire', line: 'jet', tier: 1, rs: 'luxeTransport', d: 'Jet d’affaires léger : huit passagers et Paris–Marrakech sans escale.' },
+  { id: 'yacht', cat: 'vehicules', name: 'Superyacht de 45 m', e: '🛥️', price: 35000000, pr: 700, rar: 'legendaire', line: 'yacht', tier: 1, rs: 'luxeTransport', d: 'Cinq cabines, un jacuzzi sur le pont et douze membres d’équipage. Amarré à Monaco.' },
 
   // Logement
   { id: 'studio', cat: 'logement', name: 'Studio de 12 m²', e: '🚪', price: 0, pr: 0, rar: 'commun', line: 'logement', tier: 0, garage: 1, starter: true, d: 'Ton point de départ. La douche est dans la cuisine. Une place de parking dans la rue.' },
@@ -1097,6 +1131,8 @@ const SLOT_SYMS = [
 const SLOT_CHERRY2 = 2;
 
 const ITEM = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+/* Real photos (Wikimedia Commons, free licences): PHOTO_CREDITS is injected at build time */
+for (const id in PHOTO_CREDITS) if (ITEM[id]) ITEM[id].img = 'img/' + id + '.webp';
 const JOB = Object.fromEntries(JOBS.map(j => [j.id, j]));
 const SLOT = Object.fromEntries(SLOT_SYMS.map(s => [s.id, s]));
 
@@ -1711,7 +1747,22 @@ function goTab(t) {
   if (changed) window.scrollTo(0, 0);
 }
 
-const tile = (it, cls = '') => `<span class="tile ${RARITY[it.rar].cls} ${cls}"><span class="emo"${it.fx ? ` style="filter:${it.fx}"` : ''}>${it.e}</span></span>`;
+const tile = (it, cls = '') => it.img
+  ? `<span class="tile photo ${RARITY[it.rar].cls} ${cls}"><span class="emo" aria-hidden="true">${it.e}</span><img src="${it.img}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>`
+  : `<span class="tile ${RARITY[it.rar].cls} ${cls}"><span class="emo"${it.fx ? ` style="filter:${it.fx}"` : ''}>${it.e}</span></span>`;
+/* photo credit line (CC licences ask for author, licence and source) */
+function creditHTML(c) {
+  if (!c) return '';
+  const lic = c.license_url ? `<a href="${esc(c.license_url)}" target="_blank" rel="noopener">${esc(c.license)}</a>` : esc(c.license);
+  return `Photo : ${esc(c.author)} · ${lic} · <a href="${esc(c.source)}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+}
+function creditsSheet() {
+  const list = ITEMS.filter(i => i.img && PHOTO_CREDITS[i.id]);
+  Sheet.open(`<div class="credits">
+    <p class="small muted">Vraies photos trouvées sur Wikimedia Commons, utilisées selon leur licence libre et redimensionnées pour le jeu. Merci aux photographes !</p>
+    <ul>${list.map(i => `<li><b>${esc(i.name)}</b><span>${creditHTML(PHOTO_CREDITS[i.id])}</span></li>`).join('')}</ul>
+  </div>`, { title: 'Crédits photos' });
+}
 const meter = (pct, cls = '', id = '') => `<span class="meter ${cls}"><i${id ? ` id="${id}"` : ''} style="width:${Math.max(0, Math.min(100, pct)).toFixed(2)}%"></i></span>`;
 const pctLabel = p => (p < 0.01 ? '< 0,01' : p.toFixed(p < 1 ? 2 : 1).replace('.', ',')) + ' %';
 
@@ -1871,8 +1922,12 @@ function itemSheetHTML(id) {
   } else if (block === 'garage') {
     actions = `<button class="btn btn-block" disabled>Garage plein (${E.carsOwned(S)}/${E.garageCap(S)})</button><p class="note">Achète un logement plus grand ou revends une voiture.</p>`;
   }
+  const idBlock = `<div class="is-id"><span class="rar ${rar.cls}">${rar.label}</span><h3>${it.name}</h3><p class="muted small">${it.d}</p></div>`;
+  const hero = it.img
+    ? `<figure class="is-photo"><span class="ph ${rar.cls}"><span class="emo" aria-hidden="true">${it.e}</span><img src="${it.img}" alt="${esc(it.name)}" decoding="async" onerror="this.remove()"></span>${PHOTO_CREDITS[id] ? `<figcaption>${creditHTML(PHOTO_CREDITS[id])}</figcaption>` : ''}</figure>${idBlock}`
+    : `<div class="is-hero">${tile(it, 'xl')}${idBlock}</div>`;
   return `<div class="item-sheet">
-    <div class="is-hero">${tile(it, 'xl')}<div class="is-id"><span class="rar ${rar.cls}">${rar.label}</span><h3>${it.name}</h3><p class="muted small">${it.d}</p></div></div>
+    ${hero}
     ${counts.length ? `<p class="counts"><span class="eyebrow">Compte pour</span> ${counts.join(' · ')}</p>` : ''}
     <dl class="facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
     <div class="is-actions">${actions}</div>
@@ -1966,6 +2021,7 @@ function vProfil() {
     <div class="set-row"><span>Sons</span><button class="switch ${S.set.sound ? 'on' : ''}" data-act="sound" role="switch" aria-checked="${!!S.set.sound}" aria-label="Sons du jeu"><i></i></button></div>
     <div class="set-row"><span>Sauvegarde</span><span class="muted small">${saveTxt}</span></div>
     <div class="set-row"><span>Joueur depuis</span><span class="muted small">${days} jour${days > 1 ? 's' : ''}</span></div>
+    ${Object.keys(PHOTO_CREDITS).length ? `<div class="set-row"><span>Crédits photos</span><button class="btn btn-ghost btn-sm" data-act="credits">Voir</button></div>` : ''}
     <button class="btn btn-danger-ghost btn-block" data-act="reset-ask">Recommencer à zéro</button>
   </div>
   </div></div>`;
@@ -3003,6 +3059,7 @@ const A = {
   'ot-open': otOpen, 'ot-go': otGo,
   'sheet-close': () => Sheet.close(),
   'profile-edit': profileEdit, 'profile-save': profileSave, 'pick-ava': pickAva,
+  credits: creditsSheet,
   sound: () => { S.set.sound = !S.set.sound; save(); Sfx.play('tap'); if (U.ph.open) renderPhone(); if (U.tab === 'profil') render(true); },
   wall: a => { S.set.wall = +a; save(); renderPhone(); },
   'reset-ask': resetAsk, 'reset-do': resetDo,
