@@ -140,11 +140,11 @@
   "title": "File:Embraer Phenom 300 N235EE FDK MD2.jpg"
  },
  "loft": {
-  "author": "Сергій111111",
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
-  "source": "https://commons.wikimedia.org/wiki/File:Hayloft_Apartment.jpg",
-  "title": "File:Hayloft Apartment.jpg"
+  "author": "Kidfly182",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Bushwick_Brooklyn_December_2025_003.jpg",
+  "title": "File:Bushwick Brooklyn December 2025 003.jpg"
  },
  "m4": {
   "author": "Alexander Migl",
@@ -181,12 +181,40 @@
   "source": "https://commons.wikimedia.org/wiki/File:Peugeot_208_PureTech_130_EAT8_Allure_GT-Line_(II)_%E2%80%93_f_17102021.jpg",
   "title": "File:Peugeot 208 PureTech 130 EAT8 Allure GT-Line (II) – f 17102021.jpg"
  },
+ "pentdubai": {
+  "author": "Fabio Achilli",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Dubai_Marina_Aug2012.jpg",
+  "title": "File:Dubai Marina Aug2012.jpg"
+ },
  "penthouse": {
   "author": "Dupont Circle Hotel",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:The-Dupont-Circle-Hotel-Washington-Signature-Terrace-Suite.jpg",
   "title": "File:The-Dupont-Circle-Hotel-Washington-Signature-Terrace-Suite.jpg"
+ },
+ "pentmonaco": {
+  "author": "Tobi 87",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Panorama_von_Monaco-La_Turbie.jpg",
+  "title": "File:Panorama von Monaco-La Turbie.jpg"
+ },
+ "pentny": {
+  "author": "Itrytohelp32",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Billionaires%27_Row_2020.jpg",
+  "title": "File:Billionaires' Row 2020.jpg"
+ },
+ "penttokyo": {
+  "author": "David Kernan",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower,_Minato_City.jpg",
+  "title": "File:Tokyo Tower, Minato City.jpg"
  },
  "revuelto": {
   "author": "Alexander Migl",
@@ -238,11 +266,11 @@
   "title": "File:RM 030 Automatic.jpg"
  },
  "studio": {
-  "author": "Aaaatu",
-  "license": "CC BY-SA 4.0",
-  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
-  "source": "https://commons.wikimedia.org/wiki/File:Studio_apartment_in_Finland.jpg",
-  "title": "File:Studio apartment in Finland.jpg"
+  "author": "Rafael Garcia-Suarez",
+  "license": "CC BY-SA 2.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Les_chambres_de_bonnes.jpg",
+  "title": "File:Les chambres de bonnes.jpg"
  },
  "supercar": {
   "author": "Alexander Migl",
@@ -271,6 +299,34 @@
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:La_villa_Empain-Piscine-Brussels.jpg",
   "title": "File:La villa Empain-Piscine-Brussels.jpg"
+ },
+ "villadubai": {
+  "author": "Diego Delso",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Jumeirah_Palm-Dubai4067.JPG",
+  "title": "File:Jumeirah Palm-Dubai4067.JPG"
+ },
+ "villala": {
+  "author": "Los Angeles",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Greystone_Mansion.JPG",
+  "title": "File:Greystone Mansion.JPG"
+ },
+ "villamiami": {
+  "author": "chensiyuan",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Gianni_versace_miami_home.JPG",
+  "title": "File:Gianni versace miami home.JPG"
+ },
+ "villatropez": {
+  "author": "Logret de Carlin",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Vue_depuis_la_Villa_Belrose_%C3%A0_Gassin.jpg",
+  "title": "File:Vue depuis la Villa Belrose à Gassin.jpg"
  },
  "yacht": {
   "author": "Ecuapromo",

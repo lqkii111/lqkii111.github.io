@@ -17,10 +17,10 @@ revuelto : déjà à jour
 hypercar : déjà à jour
 yacht : déjà à jour
 jet : déjà à jour
-studio : déjà à jour
+studio : OK 800×600, 97 Ko, CC BY-SA 2.0, Rafael Garcia-Suarez
 appart : déjà à jour
 maison : déjà à jour
-loft : déjà à jour
+loft : OK 800×450, 99 Ko, CC BY 4.0, Kidfly182
 villa : déjà à jour
 penthouse : déjà à jour
 manoir : déjà à jour
@@ -38,35 +38,14 @@ daydate : déjà à jour
 royaloak : déjà à jour
 complication : déjà à jour
 squelette : déjà à jour
-maisontokyo : 2 candidates pour « Japanese house garden Tokyo » (40 résultats)
-maisontokyo : 0 candidates pour « Kyu Asakura House garden » (0 résultats)
-maisontokyo : 2 candidates pour « Japanese house with garden » (40 résultats)
-villamiami : 2 candidates pour « Miami Beach waterfront house » (2 résultats)
-villamiami : 2 candidates pour « Miami Beach mansion » (40 résultats)
-villamiami : 2 candidates pour « Biscayne Bay house » (8 résultats)
-villatropez : 2 candidates pour « villa Saint-Tropez » (15 résultats)
-villatropez : 1 candidates pour « villa Ramatuelle » (4 résultats)
-villatropez : 1 candidates pour « villa Gassin » (1 résultats)
-villadubai : 2 candidates pour « Palm Jumeirah villa » (20 résultats)
-villadubai : 2 candidates pour « Palm Jumeirah villas » (20 résultats)
-villadubai : 2 candidates pour « Palm Jumeirah frond » (21 résultats)
-villala : 2 candidates pour « Beverly Hills mansion » (40 résultats)
-villala : 2 candidates pour « Beverly Hills house » (40 résultats)
-villala : 2 candidates pour « Greystone Mansion Beverly Hills » (40 résultats)
-pentdubai : 2 candidates pour « Dubai Marina skyline » (31 résultats)
-pentdubai : 2 candidates pour « Dubai Marina towers » (40 résultats)
-pentdubai : 2 candidates pour « Dubai Marina night » (33 résultats)
-penttokyo : 2 candidates pour « Tokyo skyline Roppongi » (21 résultats)
-penttokyo : 2 candidates pour « Roppongi Hills view Tokyo Tower » (40 résultats)
-penttokyo : 2 candidates pour « Tokyo skyline night » (40 résultats)
-pentny : 1 candidates pour « Central Park skyline Billionaires' Row » (3 résultats)
-pentny : 2 candidates pour « Central Park South skyline » (40 résultats)
-pentny : 2 candidates pour « Manhattan skyline Central Park » (40 résultats)
-pentmonaco : 2 candidates pour « Monaco harbour panorama » (2 résultats)
-pentmonaco : 2 candidates pour « Monte Carlo skyline » (4 résultats)
-pentmonaco : 2 candidates pour « Port Hercule Monaco » (40 résultats)
-loft_alt : 2 candidates pour « loft New York » (40 résultats)
-loft_alt : 2 candidates pour « SoHo loft » (40 résultats)
-loft_alt : 2 candidates pour « Brooklyn loft » (40 résultats)
-loft_info : 1 candidates pour « Hayloft Apartment » (1 résultats)
-studio_info : 6 candidates pour « Les chambres de bonnes » (40 résultats)
+maisontokyo : 0 candidates pour « Former Asakura Residence » (0 résultats)
+maisontokyo : 2 candidates pour « 旧朝倉家住宅 » (29 résultats)
+maisontokyo : 2 candidates pour « Tokyo garden house -Shofuso » (40 résultats)
+villamiami : OK 800×532, 101 Ko, CC BY-SA 4.0, chensiyuan
+villatropez : OK 800×600, 55 Ko, CC BY-SA 4.0, Logret de Carlin
+villadubai : OK 800×432, 57 Ko, CC BY-SA 4.0, Diego Delso
+villala : OK 800×574, 116 Ko, CC BY-SA 3.0, Los Angeles
+pentdubai : OK 800×531, 99 Ko, CC BY 2.0, Fabio Achilli
+penttokyo : OK 800×450, 70 Ko, CC BY 4.0, David Kernan
+pentny : OK 800×533, 39 Ko, CC BY-SA 4.0, Itrytohelp32
+pentmonaco : OK 800×409, 101 Ko, CC BY-SA 3.0, Tobi 87
