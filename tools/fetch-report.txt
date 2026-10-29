@@ -1,28 +1,43 @@
-velo : 6 candidates pour « Dutch city bicycle » (40 résultats)
-trottinette : 6 candidates pour « electric kick scooter » (40 résultats)
-scooter : 6 candidates pour « Honda PCX 125 » (40 résultats)
-citadine : 0 candidates pour « Renault Clio V » (0 résultats)
-p208 : 0 candidates pour « Peugeot 208 II » (0 résultats)
-berline : 6 candidates pour « Tesla Model 3 » (40 résultats)
-golfgti : 6 candidates pour « Volkswagen Golf VIII GTI » (40 résultats)
-classec : 6 candidates pour « Mercedes-Benz W206 » (40 résultats)
-m4 : 6 candidates pour « BMW M4 G82 » (40 résultats)
-sportive : 6 candidates pour « Porsche 992 Carrera » (40 résultats)
-g63 : 6 candidates pour « Mercedes-AMG G 63 » (40 résultats)
-supercar : 6 candidates pour « Porsche 992 GT3 RS » (40 résultats)
-f296 : 6 candidates pour « Ferrari 296 GTB » (40 résultats)
-huracan : 0 candidates pour « Lamborghini Huracan » (0 résultats)
-cullinan : 6 candidates pour « Rolls-Royce Cullinan » (40 résultats)
-revuelto : 6 candidates pour « Lamborghini Revuelto » (40 résultats)
-hypercar : 6 candidates pour « Bugatti Chiron » (40 résultats)
-yacht : 6 candidates pour « superyacht » (40 résultats)
-jet : 6 candidates pour « Embraer Phenom 300 » (40 résultats)
-  HTTP 414 : https://commons.wikimedia.org/w/api.php?titles=File%3ALettre+de+J.+L.+Havard%2C+pr%C3%A9sident+de+la+Commission+mixte+de+g%C3%A9ographie+institu%C3%A9e+par+les+
-studio : 0 candidates pour « chambre de bonne Paris » (40 résultats)
-appart : 4 candidates pour « appartement haussmannien » (4 résultats)
-maison : 6 candidates pour « pavillon maison jardin » (40 résultats)
-loft : 6 candidates pour « loft apartment interior » (22 résultats)
-villa : 6 candidates pour « villa piscine » (40 résultats)
-penthouse : 6 candidates pour « penthouse terrace » (40 résultats)
-manoir : 6 candidates pour « manoir XVIIIe siècle » (40 résultats)
-ile : 6 candidates pour « private island aerial » (40 résultats)
+velo : OK 800×585, 38 Ko, CC BY-SA 2.0, Todd Fahrner
+trottinette : 2 candidates pour « Xiaomi Mi Electric Scooter » (31 résultats)
+trottinette : 2 candidates pour « electric scooter Xiaomi » (37 résultats)
+trottinette : 2 candidates pour « Segway Ninebot scooter » (5 résultats)
+scooter : OK 800×600, 102 Ko, CC BY-SA 3.0, Khaosaming
+citadine : 2 candidates pour « Renault Clio V » (40 résultats)
+citadine : 2 candidates pour « Renault Clio 2019 » (40 résultats)
+citadine : 2 candidates pour « Renault Clio IV » (40 résultats)
+p208 : 2 candidates pour « Peugeot 208 II » (40 résultats)
+p208 : 2 candidates pour « Peugeot 208 2019 » (40 résultats)
+p208 : 2 candidates pour « Peugeot e-208 » (40 résultats)
+berline : OK 800×532, 70 Ko, CC BY-SA 4.0, Alexander-93
+golfgti : OK 800×462, 61 Ko, CC BY-SA 4.0, Alexander Migl
+classec : 2 candidates pour « Mercedes-Benz C 200 W206 » (35 résultats)
+classec : 2 candidates pour « Mercedes-Benz C 300 W206 » (40 résultats)
+classec : 2 candidates pour « Mercedes-Benz C 220 d W206 » (11 résultats)
+m4 : OK 800×533, 95 Ko, CC BY-SA 4.0, Alexander Migl
+sportive : OK 800×392, 58 Ko, CC BY-SA 4.0, Alexander Migl
+g63 : OK 800×471, 77 Ko, CC BY-SA 4.0, Alexander Migl
+supercar : OK 800×535, 108 Ko, CC BY-SA 4.0, Alexander Migl
+f296 : OK 800×399, 54 Ko, CC BY-SA 4.0, Alexander Migl
+huracan : 2 candidates pour « Lamborghini Huracán EVO » (40 résultats)
+huracan : 2 candidates pour « Lamborghini Huracan EVO » (40 résultats)
+huracan : 2 candidates pour « Lamborghini Huracán Tecnica » (40 résultats)
+cullinan : OK 800×600, 71 Ko, CC BY-SA 4.0, Jengtingchen
+revuelto : OK 800×535, 75 Ko, CC BY-SA 4.0, Alexander Migl
+hypercar : OK 800×534, 85 Ko, CC BY-SA 4.0, MrWalkr
+yacht : OK 800×532, 43 Ko, CC BY-SA 4.0, Ecuapromo
+jet : OK 800×424, 42 Ko, CC BY-SA 4.0, Acroterion
+studio : 2 candidates pour « studio apartment interior » (40 résultats)
+studio : 2 candidates pour « small apartment interior » (40 résultats)
+studio : 2 candidates pour « chambre de bonne » (40 résultats)
+appart : OK 800×600, 67 Ko, CC BY-SA 4.0, Hypersite
+maison : 2 candidates pour « maison individuelle jardin » (27 résultats)
+maison : 2 candidates pour « detached house garden France » (40 résultats)
+maison : 2 candidates pour « suburban house lawn » (40 résultats)
+loft : OK 800×568, 93 Ko, CC BY-SA 4.0, Сергій111111
+villa : OK 800×533, 120 Ko, CC BY-SA 4.0, Aldeko
+penthouse : 2 candidates pour « penthouse sea view » (6 résultats)
+penthouse : 0 candidates pour « luxury apartment sea view terrace » (0 résultats)
+penthouse : 0 candidates pour « apartment terrace Monaco » (0 résultats)
+manoir : OK 800×600, 131 Ko, CC BY-SA 4.0, Pimprenel
+ile : OK 800×450, 54 Ko, CC BY-SA 4.0, Msmayer8
