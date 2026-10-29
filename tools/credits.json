@@ -13,6 +13,20 @@
   "source": "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_(2023)_Autofr%C3%BChling_Ulm_IMG_9282.jpg",
   "title": "File:Tesla Model 3 (2023) Autofrühling Ulm IMG 9282.jpg"
  },
+ "bigbang": {
+  "author": "Adam Kliczek, memoriesstay.com",
+  "license": "CC BY-SA 3.0 pl",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/pl/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Warsaw,_Hublot_Boutique.jpg",
+  "title": "File:Warsaw, Hublot Boutique.jpg"
+ },
+ "chrono": {
+  "author": "Pittigrilli",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Casio_G-Shock_GA-100,_digital_and_analog_watch_(from_2010,_photographed_in_2023).jpg",
+  "title": "File:Casio G-Shock GA-100, digital and analog watch (from 2010, photographed in 2023).jpg"
+ },
  "citadine": {
   "author": "Alexander Migl",
   "license": "CC BY-SA 4.0",
@@ -27,12 +41,40 @@
   "source": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_C_300_d_AMG_Line_(W_206)_%E2%80%93_f_10032024.jpg",
   "title": "File:Mercedes-Benz C 300 d AMG Line (W 206) – f 10032024.jpg"
  },
+ "couronne": {
+  "author": "Dr.K.",
+  "license": "CC BY-SA 3.0",
+  "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "source": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_Professional.JPG",
+  "title": "File:Rolex Submariner Professional.JPG"
+ },
  "cullinan": {
   "author": "Jengtingchen",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Rolls-Royce_Cullinan_001.jpg",
   "title": "File:Rolls-Royce Cullinan 001.jpg"
+ },
+ "daydate": {
+  "author": "Kevin Sweeney",
+  "license": "CC0",
+  "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Rolex_Day-Date_Lacquered_Stella_Dial.jpg",
+  "title": "File:Rolex Day-Date Lacquered Stella Dial.jpg"
+ },
+ "daytona": {
+  "author": "Alesili",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Daytona_16528.jpg",
+  "title": "File:Daytona 16528.jpg"
+ },
+ "digitix": {
+  "author": "Multicherry",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Casio_F-91W_watch_(2023)_(front_closeup_-_time)_(minor_retouch).jpg",
+  "title": "File:Casio F-91W watch (2023) (front closeup - time) (minor retouch).jpg"
  },
  "f296": {
   "author": "Alexander Migl",
@@ -54,6 +96,13 @@
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_GTI_Clubsport_45_1X7A0298.jpg",
   "title": "File:Volkswagen Golf VIII GTI Clubsport 45 1X7A0298.jpg"
+ },
+ "heureka": {
+  "author": "Pinback66",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:TAG_Heuer_Carrera_chronograph_CV2010.JPG",
+  "title": "File:TAG Heuer Carrera chronograph CV2010.JPG"
  },
  "huracan": {
   "author": "Matti Blume",
@@ -111,6 +160,13 @@
   "source": "https://commons.wikimedia.org/wiki/File:Cambremer,_manoir_de_Cantepie_vu_du_sud.jpg",
   "title": "File:Cambremer, manoir de Cantepie vu du sud.jpg"
  },
+ "moonswatch": {
+  "author": "Bricetofly",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:MoonSwatch_collection.jpg",
+  "title": "File:MoonSwatch collection.jpg"
+ },
  "p208": {
   "author": "© M 93",
   "license": "CC BY-SA 3.0 de",
@@ -132,6 +188,20 @@
   "source": "https://commons.wikimedia.org/wiki/File:Lamborghini_Revuelto_DSC_6985.jpg",
   "title": "File:Lamborghini Revuelto DSC 6985.jpg"
  },
+ "royaloak": {
+  "author": "Clyde94",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Audemars_Piguet_Royal_Oak_Offshore_Diver.jpg",
+  "title": "File:Audemars Piguet Royal Oak Offshore Diver.jpg"
+ },
+ "santos": {
+  "author": "EMore98",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Cartier_Santos_Trianon.jpg",
+  "title": "File:Cartier Santos Trianon.jpg"
+ },
  "scooter": {
   "author": "Khaosaming",
   "license": "CC BY-SA 3.0",
@@ -139,12 +209,26 @@
   "source": "https://commons.wikimedia.org/wiki/File:Honda_PCX125_2011.JPG",
   "title": "File:Honda PCX125 2011.JPG"
  },
+ "speedmaster": {
+  "author": "Daniel Zimmermann from Bayern, Deutschland (Germany)",
+  "license": "CC BY 2.0",
+  "license_url": "https://creativecommons.org/licenses/by/2.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Speedmaster_(23456608783).jpg",
+  "title": "File:Speedmaster (23456608783).jpg"
+ },
  "sportive": {
   "author": "Alexander Migl",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Porsche_992_Carrera_S_coupe_IMG_5838.jpg",
   "title": "File:Porsche 992 Carrera S coupe IMG 5838.jpg"
+ },
+ "squelette": {
+  "author": "Y.Leclercq",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:RM_030_Automatic.jpg",
+  "title": "File:RM 030 Automatic.jpg"
  },
  "studio": {
   "author": "Aaaatu",
