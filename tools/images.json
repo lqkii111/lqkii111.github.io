@@ -161,6 +161,104 @@
   {
    "id": "squelette",
    "file": "File:RM 030 Automatic.jpg"
+  },
+  {
+   "id": "maisontokyo",
+   "q": [
+    "Japanese house garden Tokyo",
+    "Kyu Asakura House garden",
+    "Japanese house with garden"
+   ]
+  },
+  {
+   "id": "villamiami",
+   "q": [
+    "Miami Beach waterfront house",
+    "Miami Beach mansion",
+    "Biscayne Bay house"
+   ]
+  },
+  {
+   "id": "villatropez",
+   "q": [
+    "villa Saint-Tropez",
+    "villa Ramatuelle",
+    "villa Gassin"
+   ]
+  },
+  {
+   "id": "villadubai",
+   "q": [
+    "Palm Jumeirah villa",
+    "Palm Jumeirah villas",
+    "Palm Jumeirah frond"
+   ]
+  },
+  {
+   "id": "villala",
+   "q": [
+    "Beverly Hills mansion",
+    "Beverly Hills house",
+    "Greystone Mansion Beverly Hills"
+   ]
+  },
+  {
+   "id": "pentdubai",
+   "q": [
+    "Dubai Marina skyline",
+    "Dubai Marina towers",
+    "Dubai Marina night"
+   ]
+  },
+  {
+   "id": "penttokyo",
+   "q": [
+    "Tokyo skyline Roppongi",
+    "Roppongi Hills view Tokyo Tower",
+    "Tokyo skyline night"
+   ]
+  },
+  {
+   "id": "pentny",
+   "q": [
+    "Central Park skyline Billionaires' Row",
+    "Central Park South skyline",
+    "Manhattan skyline Central Park"
+   ]
+  },
+  {
+   "id": "pentmonaco",
+   "q": [
+    "Monaco harbour panorama",
+    "Monte Carlo skyline",
+    "Port Hercule Monaco"
+   ]
+  },
+  {
+   "id": "loft_alt",
+   "q": [
+    "loft New York",
+    "SoHo loft",
+    "Brooklyn loft"
+   ]
+  },
+  {
+   "id": "loft_info",
+   "q": [
+    "Hayloft Apartment"
+   ],
+   "min_w": 100,
+   "min_h": 100,
+   "min_ratio": 0.3
+  },
+  {
+   "id": "studio_info",
+   "q": [
+    "Les chambres de bonnes"
+   ],
+   "min_w": 100,
+   "min_h": 100,
+   "min_ratio": 0.3
   }
  ]
 }

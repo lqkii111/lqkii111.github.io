@@ -95,6 +95,8 @@ def infos(titles, width):
                 "license_url": clean(val("LicenseUrl"), 200),
                 "author": clean(val("Artist")) or clean(val("Credit")) or "Auteur inconnu",
                 "source": ii.get("descriptionurl", ""),
+                "desc": clean(val("ImageDescription"), 160),
+                "cats": clean(val("Categories"), 200),
             }
     return out
 
@@ -204,7 +206,8 @@ def review_sheets(rows):
                 d.rectangle([x, y, x + 34, y + 30], fill=(0, 0, 0))
                 d.text((x + 9, y + 3), str(n), fill=(255, 255, 255), font=font)
                 d.text((x, y + TH + 5), f"{m['license']} · {m['w']}×{m['h']}", fill=(170, 190, 180), font=small)
-                listing[it["id"]].append({"n": n, "title": m["title"], "license": m["license"], "author": m["author"]})
+                listing[it["id"]].append({"n": n, "title": m["title"], "license": m["license"], "author": m["author"],
+                                          "desc": m["desc"], "cats": m["cats"]})
                 time.sleep(0.3)
         sheet.save(os.path.join(rdir, f"sheet-{s // 4 + 1:02d}.jpg"), "JPEG", quality=82)
     with open(os.path.join(rdir, "candidates.json"), "w", encoding="utf-8") as f:
