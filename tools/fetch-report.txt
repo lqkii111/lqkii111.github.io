@@ -1,33 +1,27 @@
 velo : déjà à jour
-trottinette : OK 800×640, 147 Ko, CC0, Axel.206
+trottinette : déjà à jour
 scooter : déjà à jour
-citadine : OK 800×534, 65 Ko, CC BY-SA 4.0, Alexander Migl
-p208 : OK 800×398, 80 Ko, CC BY-SA 3.0 de, © M 93
+citadine : déjà à jour
+p208 : déjà à jour
 berline : déjà à jour
 golfgti : déjà à jour
-classec : OK 800×412, 63 Ko, CC BY-SA 3.0 de, © M 93
+classec : déjà à jour
 m4 : déjà à jour
 sportive : déjà à jour
 g63 : déjà à jour
 supercar : déjà à jour
 f296 : déjà à jour
-huracan : OK 800×456, 49 Ko, CC BY-SA 4.0, Matti Blume
+huracan : déjà à jour
 cullinan : déjà à jour
 revuelto : déjà à jour
 hypercar : déjà à jour
 yacht : déjà à jour
 jet : déjà à jour
-studio : OK 800×533, 61 Ko, CC BY-SA 4.0, Aaaatu
+studio : déjà à jour
 appart : déjà à jour
-maison : OK 800×633, 112 Ko, CC BY-SA 3.0, Mbzt
+maison : déjà à jour
 loft : déjà à jour
 villa : déjà à jour
-penthouse : OK 800×533, 66 Ko, CC BY-SA 4.0, Dupont Circle Hotel
+penthouse : déjà à jour
 manoir : déjà à jour
 ile : déjà à jour
-maison_alt : 2 candidates pour « Einfamilienhaus Garten » (24 résultats)
-maison_alt : 2 candidates pour « maison individuelle » (40 résultats)
-maison_alt : 2 candidates pour « house with garden » (40 résultats)
-penthouse_alt : 2 candidates pour « sea view balcony » (40 résultats)
-penthouse_alt : 2 candidates pour « terrasse vue mer » (40 résultats)
-penthouse_alt : 2 candidates pour « rooftop terrace sea » (16 résultats)
