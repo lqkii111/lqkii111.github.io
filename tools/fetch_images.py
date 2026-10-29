@@ -143,6 +143,8 @@ def final_photo(it, credits, width):
         im = im.resize((FINAL_WIDTH, round(im.height * FINAL_WIDTH / im.width)), Image.LANCZOS)
     im.save(target, "WEBP", quality=78, method=6)
     credits[iid] = {k: info[k] for k in ("title", "author", "license", "license_url", "source")}
+    if it.get("author"):  # the photographer's own requested attribution
+        credits[iid]["author"] = it["author"]
     log(f"{iid} : OK {im.width}×{im.height}, {os.path.getsize(target) // 1024} Ko, {info['license']}, {info['author']}")
     time.sleep(0.5)
 

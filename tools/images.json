@@ -111,132 +111,63 @@
   },
   {
    "id": "digitix",
-   "q": [
-    "Casio F-91W"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Casio F-91W watch (2023) (front closeup - time) (minor retouch).jpg"
   },
   {
    "id": "chrono",
-   "q": [
-    "Casio G-Shock DW-5600",
-    "Casio G-Shock"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Casio G-Shock GA-100, digital and analog watch (from 2010, photographed in 2023).jpg"
   },
   {
    "id": "moonswatch",
-   "q": [
-    "MoonSwatch",
-    "Omega Swatch Speedmaster"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:MoonSwatch collection.jpg"
   },
   {
    "id": "heureka",
-   "q": [
-    "TAG Heuer Carrera",
-    "Heuer Carrera chronograph"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:TAG Heuer Carrera chronograph CV2010.JPG"
   },
   {
    "id": "santos",
-   "q": [
-    "Cartier Santos",
-    "Santos de Cartier"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Cartier Santos Trianon.jpg"
   },
   {
    "id": "speedmaster",
-   "q": [
-    "Omega Speedmaster Professional",
-    "Omega Speedmaster Moonwatch"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Speedmaster (23456608783).jpg"
   },
   {
    "id": "couronne",
-   "q": [
-    "Rolex Submariner",
-    "Rolex Submariner Date"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Rolex Submariner Professional.JPG"
   },
   {
    "id": "bigbang",
-   "q": [
-    "Hublot Big Bang",
-    "Hublot watch"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Warsaw, Hublot Boutique.jpg",
+   "author": "Adam Kliczek, memoriesstay.com"
   },
   {
    "id": "daytona",
-   "q": [
-    "Rolex Daytona",
-    "Rolex Cosmograph Daytona"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Daytona 16528.jpg"
   },
   {
    "id": "daydate",
-   "q": [
-    "Rolex Day-Date",
-    "Rolex Day-Date President"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Rolex Day-Date Lacquered Stella Dial.jpg"
   },
   {
    "id": "royaloak",
-   "q": [
-    "Audemars Piguet Royal Oak",
-    "Royal Oak watch"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:Audemars Piguet Royal Oak Offshore Diver.jpg"
   },
   {
    "id": "complication",
    "q": [
     "Patek Philippe Nautilus",
-    "Patek Philippe watch"
+    "Patek Philippe 5711",
+    "Nautilus 5711"
    ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "min_ratio": 0.5,
+   "min_w": 500,
+   "min_h": 400
   },
   {
    "id": "squelette",
-   "q": [
-    "Richard Mille RM",
-    "Richard Mille watch"
-   ],
-   "min_ratio": 0.9,
-   "min_w": 800,
-   "min_h": 600
+   "file": "File:RM 030 Automatic.jpg"
   }
  ]
 }
