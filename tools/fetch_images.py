@@ -160,7 +160,9 @@ def candidates(it):
             m = meta.get(t) or meta.get(t.replace("_", " "))
             if not m or m["title"] in seen or m["mime"] not in ("image/jpeg", "image/png", "image/webp"):
                 continue
-            if m["w"] < 1000 or m["h"] < 560 or not (1.2 <= m["w"] / max(1, m["h"]) <= 2.1):
+            if m["w"] < it.get("min_w", 1000) or m["h"] < it.get("min_h", 560):
+                continue
+            if not (it.get("min_ratio", 1.2) <= m["w"] / max(1, m["h"]) <= 2.1):
                 continue
             if not LICENSE_OK.match(m["license"]):
                 continue
