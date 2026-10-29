@@ -34,10 +34,10 @@ def log(msg):
     report.append(msg)
 
 
-def get(url, params=None, tries=4):
+def get(url, params=None, tries=4, post=False):
     for k in range(tries):
         try:
-            r = session.get(url, params=params, timeout=40)
+            r = session.post(url, data=params, timeout=40) if post else session.get(url, params=params, timeout=40)
             if r.status_code == 200:
                 return r
             log(f"  HTTP {r.status_code} : {r.url[:160]}")
@@ -53,8 +53,14 @@ def get(url, params=None, tries=4):
 
 def api(**params):
     params.update(action="query", format="json", formatversion="2")
-    r = get(API, params)
-    return r.json() if r else {}
+    for k in range(3):
+        r = get(API, params, post=True)
+        data = r.json() if r else {}
+        if "error" not in data:
+            return data
+        log(f"  erreur API : {data['error'].get('code')} {data['error'].get('info', '')[:120]}")
+        time.sleep(5 * (k + 1))
+    return {}
 
 
 def clean(text, limit=90):
@@ -142,23 +148,31 @@ def final_photo(it, credits, width):
 
 
 def candidates(it):
-    data = api(list="search", srnamespace="6", srsearch=it["q"] + " filetype:bitmap", srlimit="40")
-    titles = [r["title"] for r in data.get("query", {}).get("search", [])]
-    meta = infos(titles, 330)
-    picked = []
-    for t in titles:
-        m = meta.get(t) or meta.get(t.replace("_", " "))
-        if not m or m["mime"] not in ("image/jpeg", "image/png", "image/webp"):
-            continue
-        if m["w"] < 1000 or m["h"] < 560 or not (1.2 <= m["w"] / max(1, m["h"]) <= 2.1):
-            continue
-        if not LICENSE_OK.match(m["license"]):
-            continue
-        picked.append(m)
+    queries = it["q"] if isinstance(it["q"], list) else [it["q"]]
+    per_query = max(2, 6 // len(queries))
+    picked, seen = [], set()
+    for q in queries:
+        data = api(list="search", srnamespace="6", srsearch=q + " filetype:bitmap", srlimit="40")
+        titles = [r["title"] for r in data.get("query", {}).get("search", [])]
+        meta = infos(titles, 330)
+        found = 0
+        for t in titles:
+            m = meta.get(t) or meta.get(t.replace("_", " "))
+            if not m or m["title"] in seen or m["mime"] not in ("image/jpeg", "image/png", "image/webp"):
+                continue
+            if m["w"] < 1000 or m["h"] < 560 or not (1.2 <= m["w"] / max(1, m["h"]) <= 2.1):
+                continue
+            if not LICENSE_OK.match(m["license"]):
+                continue
+            picked.append(m)
+            seen.add(m["title"])
+            found += 1
+            if found >= per_query or len(picked) >= 6:
+                break
+        log(f"{it['id']} : {found} candidates pour « {q} » ({len(titles)} résultats)")
         if len(picked) >= 6:
             break
-    log(f"{it['id']} : {len(picked)} candidates pour « {it['q']} » ({len(titles)} résultats)")
-    return picked
+    return picked[:6]
 
 
 def review_sheets(rows):
@@ -174,7 +188,7 @@ def review_sheets(rows):
         for row, (it, cands) in enumerate(group):
             y = GAP + row * (TH + 30 + GAP)
             d.text((10, y + 8), it["id"], fill=(246, 213, 142), font=font)
-            q = it["q"]
+            q = " / ".join(it["q"]) if isinstance(it["q"], list) else it["q"]
             for k in range(0, min(len(q), 88), 22):
                 d.text((10, y + 42 + k), q[k:k + 22], fill=(205, 205, 205), font=small)
             listing[it["id"]] = []
