@@ -13,6 +13,20 @@
   "source": "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_(2023)_Autofr%C3%BChling_Ulm_IMG_9282.jpg",
   "title": "File:Tesla Model 3 (2023) Autofrühling Ulm IMG 9282.jpg"
  },
+ "citadine": {
+  "author": "Alexander Migl",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Renault_Clio_V_Genf_2019_1Y7A5590.jpg",
+  "title": "File:Renault Clio V Genf 2019 1Y7A5590.jpg"
+ },
+ "classec": {
+  "author": "© M 93",
+  "license": "CC BY-SA 3.0 de",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_C_300_d_AMG_Line_(W_206)_%E2%80%93_f_10032024.jpg",
+  "title": "File:Mercedes-Benz C 300 d AMG Line (W 206) – f 10032024.jpg"
+ },
  "cullinan": {
   "author": "Jengtingchen",
   "license": "CC BY-SA 4.0",
@@ -40,6 +54,13 @@
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Volkswagen_Golf_VIII_GTI_Clubsport_45_1X7A0298.jpg",
   "title": "File:Volkswagen Golf VIII GTI Clubsport 45 1X7A0298.jpg"
+ },
+ "huracan": {
+  "author": "Matti Blume",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Lamborghini_Huracan_Evo,_GIMS_2019,_Le_Grand-Saconnex_(GIMS1010).jpg",
+  "title": "File:Lamborghini Huracan Evo, GIMS 2019, Le Grand-Saconnex (GIMS1010).jpg"
  },
  "hypercar": {
   "author": "MrWalkr",
@@ -76,12 +97,33 @@
   "source": "https://commons.wikimedia.org/wiki/File:BMW_M4_(G82)_Competition_1X7A0305.jpg",
   "title": "File:BMW M4 (G82) Competition 1X7A0305.jpg"
  },
+ "maison": {
+  "author": "Mbzt",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:P1240507_Paris_V_jardin_des_Plantes_maison_Cuvier_rwk.jpg",
+  "title": "File:P1240507 Paris V jardin des Plantes maison Cuvier rwk.jpg"
+ },
  "manoir": {
   "author": "Pimprenel",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Cambremer,_manoir_de_Cantepie_vu_du_sud.jpg",
   "title": "File:Cambremer, manoir de Cantepie vu du sud.jpg"
+ },
+ "p208": {
+  "author": "© M 93",
+  "license": "CC BY-SA 3.0 de",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Peugeot_208_PureTech_130_EAT8_Allure_GT-Line_(II)_%E2%80%93_f_17102021.jpg",
+  "title": "File:Peugeot 208 PureTech 130 EAT8 Allure GT-Line (II) – f 17102021.jpg"
+ },
+ "penthouse": {
+  "author": "Dupont Circle Hotel",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:The-Dupont-Circle-Hotel-Washington-Signature-Terrace-Suite.jpg",
+  "title": "File:The-Dupont-Circle-Hotel-Washington-Signature-Terrace-Suite.jpg"
  },
  "revuelto": {
   "author": "Alexander Migl",
@@ -104,12 +146,26 @@
   "source": "https://commons.wikimedia.org/wiki/File:Porsche_992_Carrera_S_coupe_IMG_5838.jpg",
   "title": "File:Porsche 992 Carrera S coupe IMG 5838.jpg"
  },
+ "studio": {
+  "author": "Aaaatu",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Studio_apartment_in_Finland.jpg",
+  "title": "File:Studio apartment in Finland.jpg"
+ },
  "supercar": {
   "author": "Alexander Migl",
   "license": "CC BY-SA 4.0",
   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Porsche_992_GT3_RS_MYLE_Festival_2025_DSC_9586.jpg",
   "title": "File:Porsche 992 GT3 RS MYLE Festival 2025 DSC 9586.jpg"
+ },
+ "trottinette": {
+  "author": "Axel.206",
+  "license": "CC0",
+  "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "source": "https://commons.wikimedia.org/wiki/File:Xiaomi_Mijia_M365_blanche_1er_juillet_2024.jpg",
+  "title": "File:Xiaomi Mijia M365 blanche 1er juillet 2024.jpg"
  },
  "velo": {
   "author": "Todd Fahrner",

@@ -1,282 +1,78 @@
 {
- "trottinette": [
+ "maison_alt": [
   {
    "n": 1,
-   "title": "File:Xiaomi M365 Pro 2 dashboard.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Terminator216"
+   "title": "File:Wärmedämmung Neubau Einfamilienhaus Nieders. 2020-8.jpg",
+   "license": "Public domain",
+   "author": "Bin im Garten"
   },
   {
    "n": 2,
-   "title": "File:Xiaomi Mijia M365 blanche 1er juillet 2024.jpg",
-   "license": "CC0",
-   "author": "Axel.206"
+   "title": "File:Wärmedämmung Neubau Einfamilienhaus Nieders. 2020-3.jpg",
+   "license": "Public domain",
+   "author": "Bin im Garten"
   },
   {
    "n": 3,
-   "title": "File:Batterie LG de 7650 mAh.jpg",
-   "license": "CC0",
-   "author": "Axel.206"
-  },
-  {
-   "n": 4,
-   "title": "File:Frank-e, Frankfurt am Main (LRM 20210417 155159).jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Matti Blume"
-  },
-  {
-   "n": 5,
-   "title": "File:Ninebot Kickscooter F2 Apodaca 02.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Sahaquiel9102"
-  },
-  {
-   "n": 6,
-   "title": "File:Ninebot Kickscooter F2 Apodaca 01.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Sahaquiel9102"
-  }
- ],
- "citadine": [
-  {
-   "n": 1,
-   "title": "File:Renault Clio V 1X7A0392.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander Migl"
-  },
-  {
-   "n": 2,
-   "title": "File:Renault Clio V (2023) 1X7A1577.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander-93"
-  },
-  {
-   "n": 3,
-   "title": "File:Renault Clio V Genf 2019 1Y7A5590.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander Migl"
-  },
-  {
-   "n": 4,
-   "title": "File:2019 Renault Clio Iconic Rear.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Vauxford"
-  },
-  {
-   "n": 5,
-   "title": "File:Renault - Clio - Mondial de l'Automobile de Paris 2012 - 201.jpg",
-   "license": "CC BY-SA 3.0",
-   "author": "Thesupermat"
-  },
-  {
-   "n": 6,
-   "title": "File:Renault Clio IV à double commande.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Sovxx"
-  }
- ],
- "p208": [
-  {
-   "n": 1,
-   "title": "File:Peugeot 208 PureTech 130 EAT8 Allure GT-Line (II) – f 17102021.jpg",
-   "license": "CC BY-SA 3.0 de",
-   "author": "© M 93"
-  },
-  {
-   "n": 2,
-   "title": "File:Peugeot 208 PureTech 130 EAT8 Allure GT-Line (II) – h 17102021.jpg",
-   "license": "CC BY-SA 3.0 de",
-   "author": "© M 93"
-  },
-  {
-   "n": 3,
-   "title": "File:Peugeot 208 GT-Line Genf 2019 1Y7A5131.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander Migl"
-  },
-  {
-   "n": 4,
-   "title": "File:Peugeot 208 GT-Line Genf 2019 1Y7A5130.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander Migl"
-  },
-  {
-   "n": 5,
-   "title": "File:Peugeot e-208 facelift Auto Zuerich 2023 1X7A1209.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander-93"
-  },
-  {
-   "n": 6,
-   "title": "File:Peugeot e-208 facelift Auto Zuerich 2023 1X7A1204.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander-93"
-  }
- ],
- "classec": [
-  {
-   "n": 1,
-   "title": "File:Mercedes-Benz C 200 AVANTGARDE (W206) rear.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Tokumeigakarinoaoshima"
-  },
-  {
-   "n": 2,
-   "title": "File:Mercedes-Benz C 200 AVANTGARDE (W206).jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Tokumeigakarinoaoshima"
-  },
-  {
-   "n": 3,
-   "title": "File:Mercedes-Benz C 300 d AMG Line (W 206) – h 10032024.jpg",
-   "license": "CC BY-SA 3.0 de",
-   "author": "© M 93"
-  },
-  {
-   "n": 4,
-   "title": "File:Mercedes-Benz C 300 d AMG Line (W 206) – f 10032024.jpg",
-   "license": "CC BY-SA 3.0 de",
-   "author": "© M 93"
-  },
-  {
-   "n": 5,
-   "title": "File:Mercedes-Benz C 220 d (W206, 2021) (54825174887).jpg",
-   "license": "CC0",
-   "author": "Charles from Port Chester, New York"
-  },
-  {
-   "n": 6,
-   "title": "File:Mercedes-Benz C 220 d AMG Line (W206, 2025) (54857970110).jpg",
-   "license": "CC0",
-   "author": "Charles from Port Chester, New York"
-  }
- ],
- "huracan": [
-  {
-   "n": 1,
-   "title": "File:Lamborghini Huracán Evo GT Celebration 1X7A1627.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Alexander-93"
-  },
-  {
-   "n": 2,
-   "title": "File:Lamborghini Huracan Super Trofeo Evo (IMG 9866).jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Terragio67"
-  },
-  {
-   "n": 3,
-   "title": "File:Lamborghini Huracan Super Trofeo Evo (IMG 9867).jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Terragio67"
-  },
-  {
-   "n": 4,
-   "title": "File:Lamborghini Huracan Evo, GIMS 2019, Le Grand-Saconnex (GIMS1010).jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Matti Blume"
-  },
-  {
-   "n": 5,
-   "title": "File:Lamborghini Huracan Tecnica.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "MrWalkr"
-  },
-  {
-   "n": 6,
-   "title": "File:Lamborghini Huracan Tecnica 12.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Calreyn88"
-  }
- ],
- "studio": [
-  {
-   "n": 1,
-   "title": "File:Studio apartment in Finland.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Aaaatu"
-  },
-  {
-   "n": 2,
-   "title": "File:John Brooke Fieldhouse interior in West London maximising use of flexible space in a studio apartment.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Duncan McNeill"
-  },
-  {
-   "n": 3,
-   "title": "File:Empty apartment room with extension cord.jpg",
-   "license": "CC BY-SA 3.0",
-   "author": "aismallard"
-  },
-  {
-   "n": 4,
-   "title": "File:Dülmen, Alte Brennerei Löhning -- 2015 -- 8609-13.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Dietmar Rabich"
-  },
-  {
-   "n": 5,
-   "title": "File:Les chambres de bonnes.jpg",
+   "title": "File:Detached house, Fearnville Place - geograph.org.uk - 3232916.jpg",
    "license": "CC BY-SA 2.0",
-   "author": "Rafael Garcia-Suarez"
-  },
-  {
-   "n": 6,
-   "title": "File:Sarlat - Manoir de Gisson - La chambre de bonne - PA00082937 - 001.jpg",
-   "license": "CC BY-SA 3.0",
-   "author": "Thesupermat"
-  }
- ],
- "maison": [
-  {
-   "n": 1,
-   "title": "File:Le pavillon du jardin (Mathildenhöhe, Darmstadt) (7892345690).jpg",
-   "license": "CC BY 2.0",
-   "author": "Jean-Pierre Dalbéra from Paris, France"
-  },
-  {
-   "n": 2,
-   "title": "File:La maison de J.M. Olbrich (Mathildenhöhe, Darmstadt) (7945572864).jpg",
-   "license": "CC BY 2.0",
-   "author": "Jean-Pierre Dalbéra from Paris, France"
-  },
-  {
-   "n": 3,
-   "title": "File:The great garden - Fontenay Abbey (35712106601).jpg",
-   "license": "CC BY-SA 2.0",
-   "author": "Elliott Brown from Birmingham, United Kingdom"
+   "author": "Christine Johnstone"
   },
   {
    "n": 4,
-   "title": "File:The great garden - Fontenay Abbey (35675062102).jpg",
+   "title": "File:Detached house at the north end of Fearnville Grove - geograph.org.uk - 3233494.jpg",
    "license": "CC BY-SA 2.0",
-   "author": "Elliott Brown from Birmingham, United Kingdom"
+   "author": "Christine Johnstone"
   },
   {
    "n": 5,
-   "title": "File:View of a suburban house (AM 82113-1).jpg",
+   "title": "File:Alpine House, Kew Gardens, 2018 edit.jpg",
+   "license": "CC BY-SA 3.0",
+   "author": "Daniel Case"
+  },
+  {
+   "n": 6,
+   "title": "File:Bodnant Garden summer house - north facade.jpg",
+   "license": "CC BY-SA 4.0",
+   "author": "DeFacto"
+  }
+ ],
+ "penthouse_alt": [
+  {
+   "n": 1,
+   "title": "File:View of the sea from the balcony of the Turner Gallery - geograph.org.uk - 6242230.jpg",
+   "license": "CC BY-SA 2.0",
+   "author": "Robert Lamb"
+  },
+  {
+   "n": 2,
+   "title": "File:Sea View from Balcony - panoramio.jpg",
+   "license": "CC BY 3.0",
+   "author": "Phill Walker"
+  },
+  {
+   "n": 3,
+   "title": "File:Vue depuis terrasse du Treport.JPG",
+   "license": "CC0",
+   "author": "Roloff"
+  },
+  {
+   "n": 4,
+   "title": "File:Terrasse du bar L'Effet mer (Vichy), vue vers le sud 2026-06-20.JPG",
+   "license": "CC BY-SA 4.0",
+   "author": "Tabl-trai"
+  },
+  {
+   "n": 5,
+   "title": "File:Participation of José Manuel Barroso, President of the EC, in the Baltic Sea States Summit 2012 (P-020964-00-58).jpg",
    "license": "CC BY 4.0",
-   "author": "Collins, Tudor Washington, 1898-1970, photographer"
+   "author": "Europäische Kommission - Audiovisueller Dienst, Cornelia Smet, CE - Service audiovisuel, E"
   },
   {
    "n": 6,
-   "title": "File:View of a suburban house (AM 82113-2).jpg",
+   "title": "File:Participation of José Manuel Barroso, President of the EC, in the Baltic Sea States Summit 2012 (P-020964-00-56).jpg",
    "license": "CC BY 4.0",
-   "author": "Collins, Tudor Washington, 1898-1970, photographer"
-  }
- ],
- "penthouse": [
-  {
-   "n": 1,
-   "title": "File:Box girder and cellular beam designed by architect Mario Kleff.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Designer Mario Kleff"
-  },
-  {
-   "n": 2,
-   "title": "File:Penthousewohnung in Wien.jpg",
-   "license": "CC BY-SA 4.0",
-   "author": "Penta*stefan"
+   "author": "Europäische Kommission - Audiovisueller Dienst, Cornelia Smet, CE - Service audiovisuel, E"
   }
  ]
 }
