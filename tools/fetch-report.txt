@@ -17,10 +17,10 @@ revuelto : déjà à jour
 hypercar : déjà à jour
 yacht : déjà à jour
 jet : déjà à jour
-studio : OK 800×600, 97 Ko, CC BY-SA 2.0, Rafael Garcia-Suarez
+studio : déjà à jour
 appart : déjà à jour
 maison : déjà à jour
-loft : OK 800×450, 99 Ko, CC BY 4.0, Kidfly182
+loft : déjà à jour
 villa : déjà à jour
 penthouse : déjà à jour
 manoir : déjà à jour
@@ -38,14 +38,12 @@ daydate : déjà à jour
 royaloak : déjà à jour
 complication : déjà à jour
 squelette : déjà à jour
-maisontokyo : 0 candidates pour « Former Asakura Residence » (0 résultats)
-maisontokyo : 2 candidates pour « 旧朝倉家住宅 » (29 résultats)
-maisontokyo : 2 candidates pour « Tokyo garden house -Shofuso » (40 résultats)
-villamiami : OK 800×532, 101 Ko, CC BY-SA 4.0, chensiyuan
-villatropez : OK 800×600, 55 Ko, CC BY-SA 4.0, Logret de Carlin
-villadubai : OK 800×432, 57 Ko, CC BY-SA 4.0, Diego Delso
-villala : OK 800×574, 116 Ko, CC BY-SA 3.0, Los Angeles
-pentdubai : OK 800×531, 99 Ko, CC BY 2.0, Fabio Achilli
-penttokyo : OK 800×450, 70 Ko, CC BY 4.0, David Kernan
-pentny : OK 800×533, 39 Ko, CC BY-SA 4.0, Itrytohelp32
-pentmonaco : OK 800×409, 101 Ko, CC BY-SA 3.0, Tobi 87
+maisontokyo : OK 800×533, 132 Ko, CC BY 4.0, This Photo was taken by Supanut Arunoprayote . Feel free to use any of my images, but plea
+villamiami : déjà à jour
+villatropez : déjà à jour
+villadubai : déjà à jour
+villala : déjà à jour
+pentdubai : déjà à jour
+penttokyo : déjà à jour
+pentny : déjà à jour
+pentmonaco : déjà à jour
