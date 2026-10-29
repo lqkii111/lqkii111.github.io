@@ -1,0 +1,32 @@
+{
+ "width": 960,
+ "items": [
+  {"id": "velo", "q": "Dutch city bicycle"},
+  {"id": "trottinette", "q": "electric kick scooter"},
+  {"id": "scooter", "q": "Honda PCX 125"},
+  {"id": "citadine", "q": "Renault Clio V"},
+  {"id": "p208", "q": "Peugeot 208 II"},
+  {"id": "berline", "q": "Tesla Model 3"},
+  {"id": "golfgti", "q": "Volkswagen Golf VIII GTI"},
+  {"id": "classec", "q": "Mercedes-Benz W206"},
+  {"id": "m4", "q": "BMW M4 G82"},
+  {"id": "sportive", "q": "Porsche 992 Carrera"},
+  {"id": "g63", "q": "Mercedes-AMG G 63"},
+  {"id": "supercar", "q": "Porsche 992 GT3 RS"},
+  {"id": "f296", "q": "Ferrari 296 GTB"},
+  {"id": "huracan", "q": "Lamborghini Huracan"},
+  {"id": "cullinan", "q": "Rolls-Royce Cullinan"},
+  {"id": "revuelto", "q": "Lamborghini Revuelto"},
+  {"id": "hypercar", "q": "Bugatti Chiron"},
+  {"id": "yacht", "q": "superyacht"},
+  {"id": "jet", "q": "Embraer Phenom 300"},
+  {"id": "studio", "q": "chambre de bonne Paris"},
+  {"id": "appart", "q": "appartement haussmannien"},
+  {"id": "maison", "q": "pavillon maison jardin"},
+  {"id": "loft", "q": "loft apartment interior"},
+  {"id": "villa", "q": "villa piscine"},
+  {"id": "penthouse", "q": "penthouse terrace"},
+  {"id": "manoir", "q": "manoir XVIIIe siècle"},
+  {"id": "ile", "q": "private island aerial"}
+ ]
+}

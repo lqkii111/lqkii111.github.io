@@ -1,0 +1,38 @@
+name: Photos de la boutique
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/images.json'
+      - 'tools/fetch_images.py'
+      - '.github/workflows/images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: photos
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow==11.0.0 requests==2.32.3
+      - run: python tools/fetch_images.py
+      - name: Enregistrer les photos
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Rien de nouveau"; exit 0; fi
+          git commit -m "Photos de la boutique : mise à jour automatique"
+          git push
