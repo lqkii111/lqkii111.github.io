@@ -1,32 +1,129 @@
 {
  "width": 960,
  "items": [
-  {"id": "velo", "file": "File:Dutch bicycle with front carrier in front of house.jpg"},
-  {"id": "trottinette", "q": ["Xiaomi Mi Electric Scooter", "electric scooter Xiaomi", "Segway Ninebot scooter"]},
-  {"id": "scooter", "file": "File:Honda PCX125 2011.JPG"},
-  {"id": "citadine", "q": ["Renault Clio V", "Renault Clio 2019", "Renault Clio IV"]},
-  {"id": "p208", "q": ["Peugeot 208 II", "Peugeot 208 2019", "Peugeot e-208"]},
-  {"id": "berline", "file": "File:Tesla Model 3 (2023) Autofrühling Ulm IMG 9282.jpg"},
-  {"id": "golfgti", "file": "File:Volkswagen Golf VIII GTI Clubsport 45 1X7A0298.jpg"},
-  {"id": "classec", "q": ["Mercedes-Benz C 200 W206", "Mercedes-Benz C 300 W206", "Mercedes-Benz C 220 d W206"]},
-  {"id": "m4", "file": "File:BMW M4 (G82) Competition 1X7A0305.jpg"},
-  {"id": "sportive", "file": "File:Porsche 992 Carrera S coupe IMG 5838.jpg"},
-  {"id": "g63", "file": "File:Mercedes-AMG G 63 (2018) IMG 4370.jpg"},
-  {"id": "supercar", "file": "File:Porsche 992 GT3 RS MYLE Festival 2025 DSC 9586.jpg"},
-  {"id": "f296", "file": "File:Ferrari 296 GTB 1X7A6377.jpg"},
-  {"id": "huracan", "q": ["Lamborghini Huracán EVO", "Lamborghini Huracan EVO", "Lamborghini Huracán Tecnica"]},
-  {"id": "cullinan", "file": "File:Rolls-Royce Cullinan 001.jpg"},
-  {"id": "revuelto", "file": "File:Lamborghini Revuelto DSC 6985.jpg"},
-  {"id": "hypercar", "file": "File:Bugatti Chiron Royal Blue.jpg"},
-  {"id": "yacht", "file": "File:Stella-maris-luxury-yacht-gallery-10.jpg"},
-  {"id": "jet", "file": "File:Embraer Phenom 300 N235EE FDK MD2.jpg"},
-  {"id": "studio", "q": ["studio apartment interior", "small apartment interior", "chambre de bonne"]},
-  {"id": "appart", "file": "File:Le Plessis-Robinson-02.jpg"},
-  {"id": "maison", "q": ["maison individuelle jardin", "detached house garden France", "suburban house lawn"]},
-  {"id": "loft", "file": "File:Hayloft Apartment.jpg"},
-  {"id": "villa", "file": "File:La villa Empain-Piscine-Brussels.jpg"},
-  {"id": "penthouse", "q": ["penthouse sea view", "luxury apartment sea view terrace", "apartment terrace Monaco"]},
-  {"id": "manoir", "file": "File:Cambremer, manoir de Cantepie vu du sud.jpg"},
-  {"id": "ile", "file": "File:Aerial of Coffee Caye from the south.jpg"}
+  {
+   "id": "velo",
+   "file": "File:Dutch bicycle with front carrier in front of house.jpg"
+  },
+  {
+   "id": "trottinette",
+   "file": "File:Xiaomi Mijia M365 blanche 1er juillet 2024.jpg"
+  },
+  {
+   "id": "scooter",
+   "file": "File:Honda PCX125 2011.JPG"
+  },
+  {
+   "id": "citadine",
+   "file": "File:Renault Clio V Genf 2019 1Y7A5590.jpg"
+  },
+  {
+   "id": "p208",
+   "file": "File:Peugeot 208 PureTech 130 EAT8 Allure GT-Line (II) – f 17102021.jpg"
+  },
+  {
+   "id": "berline",
+   "file": "File:Tesla Model 3 (2023) Autofrühling Ulm IMG 9282.jpg"
+  },
+  {
+   "id": "golfgti",
+   "file": "File:Volkswagen Golf VIII GTI Clubsport 45 1X7A0298.jpg"
+  },
+  {
+   "id": "classec",
+   "file": "File:Mercedes-Benz C 300 d AMG Line (W 206) – f 10032024.jpg"
+  },
+  {
+   "id": "m4",
+   "file": "File:BMW M4 (G82) Competition 1X7A0305.jpg"
+  },
+  {
+   "id": "sportive",
+   "file": "File:Porsche 992 Carrera S coupe IMG 5838.jpg"
+  },
+  {
+   "id": "g63",
+   "file": "File:Mercedes-AMG G 63 (2018) IMG 4370.jpg"
+  },
+  {
+   "id": "supercar",
+   "file": "File:Porsche 992 GT3 RS MYLE Festival 2025 DSC 9586.jpg"
+  },
+  {
+   "id": "f296",
+   "file": "File:Ferrari 296 GTB 1X7A6377.jpg"
+  },
+  {
+   "id": "huracan",
+   "file": "File:Lamborghini Huracan Evo, GIMS 2019, Le Grand-Saconnex (GIMS1010).jpg"
+  },
+  {
+   "id": "cullinan",
+   "file": "File:Rolls-Royce Cullinan 001.jpg"
+  },
+  {
+   "id": "revuelto",
+   "file": "File:Lamborghini Revuelto DSC 6985.jpg"
+  },
+  {
+   "id": "hypercar",
+   "file": "File:Bugatti Chiron Royal Blue.jpg"
+  },
+  {
+   "id": "yacht",
+   "file": "File:Stella-maris-luxury-yacht-gallery-10.jpg"
+  },
+  {
+   "id": "jet",
+   "file": "File:Embraer Phenom 300 N235EE FDK MD2.jpg"
+  },
+  {
+   "id": "studio",
+   "file": "File:Studio apartment in Finland.jpg"
+  },
+  {
+   "id": "appart",
+   "file": "File:Le Plessis-Robinson-02.jpg"
+  },
+  {
+   "id": "maison",
+   "file": "File:P1240507 Paris V jardin des Plantes maison Cuvier rwk.jpg"
+  },
+  {
+   "id": "loft",
+   "file": "File:Hayloft Apartment.jpg"
+  },
+  {
+   "id": "villa",
+   "file": "File:La villa Empain-Piscine-Brussels.jpg"
+  },
+  {
+   "id": "penthouse",
+   "file": "File:The-Dupont-Circle-Hotel-Washington-Signature-Terrace-Suite.jpg"
+  },
+  {
+   "id": "manoir",
+   "file": "File:Cambremer, manoir de Cantepie vu du sud.jpg"
+  },
+  {
+   "id": "ile",
+   "file": "File:Aerial of Coffee Caye from the south.jpg"
+  },
+  {
+   "id": "maison_alt",
+   "q": [
+    "Einfamilienhaus Garten",
+    "maison individuelle",
+    "house with garden"
+   ]
+  },
+  {
+   "id": "penthouse_alt",
+   "q": [
+    "sea view balcony",
+    "terrasse vue mer",
+    "rooftop terrace sea"
+   ]
+  }
  ]
 }
