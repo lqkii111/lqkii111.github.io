@@ -108,6 +108,135 @@
   {
    "id": "ile",
    "file": "File:Aerial of Coffee Caye from the south.jpg"
+  },
+  {
+   "id": "digitix",
+   "q": [
+    "Casio F-91W"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "chrono",
+   "q": [
+    "Casio G-Shock DW-5600",
+    "Casio G-Shock"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "moonswatch",
+   "q": [
+    "MoonSwatch",
+    "Omega Swatch Speedmaster"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "heureka",
+   "q": [
+    "TAG Heuer Carrera",
+    "Heuer Carrera chronograph"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "santos",
+   "q": [
+    "Cartier Santos",
+    "Santos de Cartier"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "speedmaster",
+   "q": [
+    "Omega Speedmaster Professional",
+    "Omega Speedmaster Moonwatch"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "couronne",
+   "q": [
+    "Rolex Submariner",
+    "Rolex Submariner Date"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "bigbang",
+   "q": [
+    "Hublot Big Bang",
+    "Hublot watch"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "daytona",
+   "q": [
+    "Rolex Daytona",
+    "Rolex Cosmograph Daytona"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "daydate",
+   "q": [
+    "Rolex Day-Date",
+    "Rolex Day-Date President"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "royaloak",
+   "q": [
+    "Audemars Piguet Royal Oak",
+    "Royal Oak watch"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "complication",
+   "q": [
+    "Patek Philippe Nautilus",
+    "Patek Philippe watch"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
+  },
+  {
+   "id": "squelette",
+   "q": [
+    "Richard Mille RM",
+    "Richard Mille watch"
+   ],
+   "min_ratio": 0.9,
+   "min_w": 800,
+   "min_h": 600
   }
  ]
 }
