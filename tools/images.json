@@ -156,14 +156,7 @@
   },
   {
    "id": "complication",
-   "q": [
-    "Patek Philippe Nautilus",
-    "Patek Philippe 5711",
-    "Nautilus 5711"
-   ],
-   "min_ratio": 0.5,
-   "min_w": 500,
-   "min_h": 400
+   "file": "File:Patek-Philippe-Nautilus-5711-1A-010-1.jpg"
   },
   {
    "id": "squelette",
