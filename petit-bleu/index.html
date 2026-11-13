@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<!--
+  Petit Bleu : fais passer des fichiers entre ton PC et ton téléphone, directement.
+
+  COMMENT ÇA MARCHE
+  - Chaque appareil qui ouvre la page reçoit un code de 6 caractères (affiché aussi en QR code).
+  - Le téléphone scanne le QR code : il ouvre la même page avec le code à la fin de l'adresse
+    (…/#K7MQ2P) et demande à se connecter à l'appareil qui porte ce code.
+  - La mise en relation passe par le serveur gratuit de PeerJS (0.peerjs.com). Ensuite les deux
+    navigateurs ouvrent une connexion directe WebRTC, chiffrée : les fichiers ne passent pas par
+    ce serveur et ne sont stockés nulle part.
+  - Chaque fichier est découpé en morceaux de 64 Ko, envoyés dans l'ordre, puis recollés à l'arrivée.
+
+  METTRE LE SITE EN LIGNE (gratuit) : il suffit d'héberger ce fichier en HTTPS, sous le nom index.html.
+  - GitHub Pages : crée un dépôt, ajoute ce fichier, puis Settings > Pages > Deploy from a branch.
+  - Netlify Drop : glisse le dossier qui contient ce fichier sur app.netlify.com/drop
+    (crée un compte gratuit pour garder le site, sinon il est supprimé au bout d'une heure).
+  Ouvert directement depuis ton disque (file://), la page s'affiche mais le téléphone ne peut pas la joindre.
+
+  Bibliothèques chargées depuis un CDN : PeerJS (connexion directe) et qrcode-generator (QR code).
+  La police Archivo vient de Google Fonts ; sans elle, la page reste lisible avec les polices du système.
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petit Bleu : tes fichiers du PC au téléphone</title>
+<meta name="description" content="Envoie photos, vidéos et documents de ton PC à ton téléphone (et inversement), directement, sans câble ni compte.">
+<meta name="theme-color" content="#C7D8EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1A31" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='9' width='28' height='14' rx='7' fill='%23A97A22'/%3E%3Crect x='11' y='9' width='3' height='14' fill='%23142449' opacity='.3'/%3E%3Crect x='18' y='9' width='3' height='14' fill='%23142449' opacity='.3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<style>
+  :root {
+    color-scheme: light dark;
+    --paper: #C7D8EA;      /* le bleu du papier pneumatique */
+    --sheet: #EEF4FA;      /* la carte */
+    --field: #FFFFFF;
+    --ink: #142449;        /* l'encre */
+    --ink-2: #485A80;
+    --rule: #A9BED6;
+    --brass: #A97A22;      /* le laiton des tubes et des capsules */
+    --brass-hi: #DDB053;
+    --ok: #2E7D50;
+    --stamp: #B23A30;
+    --postmark: rgba(20, 36, 73, .6);
+    --postmark-blend: multiply;
+    --font: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0E1A31;
+      --sheet: #16264A;
+      --field: #0E1A31;
+      --ink: #DCE7F4;
+      --ink-2: #9DB0CE;
+      --rule: #2D4272;
+      --brass: #D3A23F;
+      --brass-hi: #F2C86A;
+      --ok: #5CCB8E;
+      --stamp: #F08A7E;
+      --postmark: rgba(157, 176, 206, .75);
+      --postmark-blend: normal;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font);
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  [hidden] { display: none !important; }
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  :focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+  button, a, label { -webkit-tap-highlight-color: transparent; }
+  h1, h2, p { margin: 0; }
+
+  /* ---------- En-tête ---------- */
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    padding: 14px clamp(16px, 4vw, 40px);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+    font-stretch: 70%;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: .01em;
+  }
+  .brand-mark { width: 38px; height: 19px; }
+  .brand-mark .body { fill: var(--brass); }
+  .brand-mark .band { fill: var(--ink); opacity: .25; }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--sheet) 60%, transparent);
+    font-size: .92rem;
+  }
+  .lamp { width: 9px; height: 9px; flex: none; border-radius: 50%; background: var(--ink-2); opacity: .55; }
+  .lamp[data-kind="ok"] { background: var(--ok); opacity: 1; }
+  .lamp[data-kind="wait"] { background: var(--brass); opacity: 1; animation: blink 1.2s ease-in-out infinite; }
+  .lamp[data-kind="error"] { background: var(--stamp); opacity: 1; }
+  @keyframes blink { 50% { opacity: .3; } }
+
+  /* ---------- Boutons : des capsules ---------- */
+  .btn, .btn-quiet {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 9px 20px;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn { background: var(--ink); color: var(--sheet); border: 1.5px solid var(--ink); }
+  .btn:hover { background: color-mix(in srgb, var(--ink) 86%, var(--brass)); }
+  .btn-quiet { background: transparent; color: var(--ink); border: 1.5px solid color-mix(in srgb, var(--ink) 35%, transparent); }
+  .btn-quiet:hover { border-color: var(--ink); }
+  .btn-quiet:disabled { opacity: .5; cursor: default; }
+
+  /* ---------- Mise en page ---------- */
+  main {
+    flex: 1;
+    width: min(100%, 1020px);
+    margin: 0 auto;
+    padding: 6px clamp(16px, 4vw, 40px) 32px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    align-content: start;
+  }
+  .card {
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: clamp(22px, 4vw, 44px);
+  }
+
+  .banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 16px;
+    padding: 10px 10px 10px 20px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--sheet);
+  }
+  .banner[data-kind="error"] { border-radius: 16px; background: var(--stamp); color: #fff; }
+  .banner .btn { min-height: 40px; background: var(--sheet); color: var(--ink); border-color: var(--sheet); }
+
+  /* ---------- Appairage ---------- */
+  .pair-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: clamp(28px, 5vw, 56px);
+  }
+  .pair-text { align-self: center; }
+  .pair h1 {
+    max-width: 11ch;
+    margin-bottom: 18px;
+    font-stretch: 66%;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 1.5rem + 3.4vw, 4rem);
+    line-height: .96;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+  .lead { max-width: 34ch; margin-bottom: 26px; color: var(--ink-2); font-size: 1.1rem; }
+  .steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+  .steps li { display: grid; grid-template-columns: 1.8rem 1fr; align-items: baseline; counter-increment: step; max-width: 40ch; }
+  .steps li::before {
+    content: counter(step);
+    color: var(--brass);
+    font-stretch: 62%;
+    font-weight: 800;
+    font-size: 1.55rem;
+    line-height: 1;
+  }
+  .steps-handheld { display: none; }
+  .is-handheld .steps-desktop { display: none; }
+  .is-handheld .steps-handheld { display: grid; }
+
+  /* Le côté « enveloppe » : un timbre (le QR code) et son cachet */
+  .qr-side {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 14px;
+    padding: 72px 24px 28px;
+    border-radius: 14px;
+    background: var(--paper);
+    text-align: center;
+  }
+  .qr-wrap { position: relative; width: min(270px, 100%); }
+  .qr {
+    width: 100%;
+    aspect-ratio: 1;
+    transform: rotate(-2deg);
+    filter: drop-shadow(0 1px 1px rgba(20, 36, 73, .22)) drop-shadow(0 10px 16px rgba(20, 36, 73, .16));
+  }
+  .qr svg { display: block; width: 100%; height: 100%; }
+  .qr .stamp-paper { fill: #fff; }
+  .qr .stamp-ink { fill: #142449; }
+  .qr-empty { display: grid; place-items: center; width: 100%; height: 100%; padding: 24px; border-radius: 6px; background: var(--sheet); color: var(--ink-2); }
+  /* Le cachet ne touche que le coin du timbre : la marge blanche du QR code reste intacte. */
+  .postmark {
+    position: absolute;
+    top: -84px;
+    left: calc(100% - 30px);
+    width: 104px;
+    height: 104px;
+    transform: rotate(14deg);
+    color: var(--postmark);
+    mix-blend-mode: var(--postmark-blend);
+    pointer-events: none;
+  }
+  .postmark circle { fill: none; stroke: currentColor; }
+  .postmark text { fill: currentColor; font-family: var(--font); font-stretch: 72%; font-weight: 700; }
+  .postmark .pm-ring { font-size: 10.5px; letter-spacing: 1.1px; }
+  .postmark .pm-date { font-size: 12.5px; font-weight: 800; }
+  .postmark .pm-time { font-size: 11px; }
+  .qr-caption { max-width: 30ch; color: var(--ink-2); font-size: .95rem; }
+  .code {
+    font-stretch: 62%;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 2rem + 2vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: .08em;
+    font-variant-numeric: tabular-nums;
+    user-select: all;
+  }
+  .warning { max-width: 34ch; color: var(--stamp); font-size: .92rem; }
+  .show-qr { display: none; margin-top: 18px; }
+  .is-handheld .show-qr { display: inline-flex; }
+  .is-handheld .qr-side:not(.open) { display: none; }
+
+  .join { display: grid; gap: 8px; margin-top: 28px; padding-top: 22px; border-top: 1px dashed var(--rule); }
+  .join label { font-weight: 700; }
+  .join-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .join input {
+    flex: 1 1 11rem;
+    min-width: 0;
+    min-height: 50px;
+    padding: 8px 20px;
+    border: 1.5px solid var(--ink-2);
+    border-radius: 999px;
+    background: var(--field);
+    color: var(--ink);
+    font: inherit;
+    font-stretch: 72%;
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .join input::placeholder {
+    color: var(--ink-2);
+    opacity: .75;
+    font-weight: 400;
+    letter-spacing: .04em;
+    text-transform: none;
+  }
+  .join .btn { min-height: 50px; padding-inline: 26px; }
+  .error { color: var(--stamp); font-size: .95rem; }
+
+  /* ---------- Connexion en cours ---------- */
+  .connecting { display: grid; gap: 12px; justify-items: start; }
+  .connecting-title { font-stretch: 68%; font-weight: 800; font-size: clamp(1.8rem, 1.3rem + 2vw, 2.6rem); line-height: 1.02; }
+  .connecting-sub { max-width: 46ch; color: var(--ink-2); }
+  .connecting .tube { width: min(360px, 100%); margin: 6px 0 4px; }
+  .connecting .fill { width: 30%; animation: shuttle 1.6s ease-in-out infinite alternate; }
+  @keyframes shuttle { from { left: 0; } to { left: 70%; } }
+
+  /* ---------- Envoi : la fente ---------- */
+  .slot {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    padding: clamp(26px, 5vw, 46px) 20px;
+    border: 2px dashed rgba(72, 90, 128, .6);
+    border: 2px dashed color-mix(in srgb, var(--ink) 40%, transparent);
+    border-radius: 20px;
+    background: var(--sheet);
+    text-align: center;
+    cursor: pointer;
+  }
+  .slot:hover, .slot.over { border-color: var(--brass); background: color-mix(in srgb, var(--brass) 8%, var(--sheet)); }
+  .slot:focus-within { outline: 3px solid var(--brass); outline-offset: 3px; }
+  .slot-art { width: 104px; height: auto; margin-bottom: 6px; }
+  .slot-art .plate { stroke: color-mix(in srgb, var(--ink) 30%, transparent); stroke-width: 1; }
+  .slot-art .slit { fill: var(--ink); }
+  .slot-art .capsule-body { fill: var(--sheet); stroke: var(--ink); stroke-width: 2; }
+  .slot-art .capsule-band { fill: var(--brass); }
+  .slot-art .capsule { transition: transform .35s cubic-bezier(.3, .7, .4, 1); }
+  .slot:hover .capsule, .slot.over .capsule { transform: translateY(13px); }
+  .slot-title { font-stretch: 66%; font-weight: 800; font-size: clamp(1.8rem, 1.2rem + 2.2vw, 2.6rem); line-height: 1.02; }
+  .slot-sub { max-width: 42ch; color: var(--ink-2); }
+
+  /* ---------- Liste des fichiers ---------- */
+  .files { padding: 6px clamp(16px, 3vw, 28px) 14px; }
+  .files-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .files h2 { font-stretch: 68%; font-weight: 800; font-size: 1.6rem; }
+  .files-head .btn-quiet { min-height: 38px; padding: 6px 16px; font-size: .92rem; }
+  .list { margin: 0; padding: 0; list-style: none; }
+  .item {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
+  }
+  .item:last-child { border-bottom: 0; }
+  .thumb {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 58px;
+    padding: 0;
+    overflow: hidden;
+    border: 1.5px solid color-mix(in srgb, var(--ink) 25%, transparent);
+    border-radius: 21px;               /* une capsule */
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-stretch: 62%;
+    font-weight: 800;
+    font-size: .78rem;
+  }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  button.thumb { cursor: zoom-in; }
+  .item.arrived .thumb { animation: arrived 1.4s ease-out; }
+  @keyframes arrived {
+    from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--brass) 75%, transparent); }
+    to { box-shadow: 0 0 0 16px transparent; }
+  }
+  .meta-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .name { overflow: hidden; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+  .size { flex: none; color: var(--ink-2); font-size: .9rem; font-variant-numeric: tabular-nums; }
+  .state { margin-top: 2px; color: var(--ink-2); font-size: .92rem; }
+  .item[data-state="done"] .state { color: var(--ink); }
+  .item[data-state="error"] .state { color: var(--stamp); }
+  .actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+  .actions:empty { display: none; }
+  .actions .btn, .actions .btn-quiet { min-height: 40px; padding: 7px 18px; font-size: .95rem; }
+  .tip { margin-top: 10px; padding-top: 12px; border-top: 1px dashed var(--rule); color: var(--ink-2); font-size: .92rem; }
+
+  /* Le tube : une capsule en laiton avance au fil du transfert */
+  .tube {
+    position: relative;
+    height: 14px;
+    margin-top: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(72, 90, 128, .14);
+    background: color-mix(in srgb, var(--ink) 7%, var(--sheet));
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--ink) 16%, transparent),
+      inset 0 2px 3px color-mix(in srgb, var(--ink) 14%, transparent);
+  }
+  .fill {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: max(32px, var(--p, 0%));
+    border-radius: 999px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--brass) 6%, transparent), color-mix(in srgb, var(--brass) 36%, transparent));
+    transition: width .2s linear;
+  }
+  .fill::after {
+    content: "";
+    position: absolute;
+    top: 2px; right: 2px; bottom: 2px;
+    width: 28px;
+    border-radius: 999px;
+    background:
+      linear-gradient(90deg, transparent 30%, rgba(20, 36, 73, .3) 30% 37%, transparent 37% 63%, rgba(20, 36, 73, .3) 63% 70%, transparent 70%),
+      linear-gradient(var(--brass-hi), var(--brass) 75%);
+    box-shadow: 0 1px 2px rgba(20, 36, 73, .3);
+  }
+  .item:not([data-state="active"]) .tube { display: none; }
+
+  /* ---------- Aperçu plein écran ---------- */
+  .viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px 16px 20px;
+    background: rgba(5, 10, 22, .92);
+    color: #fff;
+  }
+  .viewer-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .viewer-title { overflow: hidden; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+  .viewer .btn-quiet { color: #fff; border-color: rgba(255, 255, 255, .5); }
+  .viewer-body { display: grid; place-items: center; min-height: 0; }
+  .viewer-body img, .viewer-body video { max-width: 100%; max-height: 100%; border-radius: 6px; }
+
+  /* ---------- Pied de page ---------- */
+  .foot {
+    display: grid;
+    gap: 4px;
+    padding: 18px clamp(16px, 4vw, 40px) 28px;
+    color: var(--ink-2);
+    font-size: .9rem;
+    text-align: center;
+  }
+
+  /* ---------- Petits écrans ---------- */
+  @media (max-width: 760px) {
+    .pair-grid { grid-template-columns: minmax(0, 1fr); }
+    .qr-side { padding: 28px 18px 22px; }
+    .qr-wrap { width: min(240px, 72vw); }
+    .postmark { display: none; }
+  }
+  @media (max-width: 560px) {
+    .status { order: 3; }
+    .banner { border-radius: 16px; }
+    .item { grid-template-columns: 42px minmax(0, 1fr); }
+    .actions { grid-column: 2; justify-content: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lamp[data-kind="wait"], .connecting .fill, .item.arrived .thumb { animation: none; }
+    .fill, .slot-art .capsule { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 20" aria-hidden="true">
+        <rect class="body" x="1" y="2" width="38" height="16" rx="8"/>
+        <rect class="band" x="13" y="2" width="3" height="16"/>
+        <rect class="band" x="24" y="2" width="3" height="16"/>
+      </svg>
+      <span>Petit Bleu</span>
+    </div>
+    <div class="status" role="status" aria-live="polite">
+      <span class="lamp" id="lamp" data-kind="wait"></span>
+      <span id="status-text">Démarrage…</span>
+    </div>
+    <button class="btn-quiet" id="disconnect" type="button" hidden>Déconnecter</button>
+  </header>
+
+  <main>
+    <noscript><p class="card">Ce site a besoin de JavaScript pour fonctionner.</p></noscript>
+
+    <div class="banner" id="banner" hidden>
+      <p id="banner-text"></p>
+      <button class="btn" id="banner-action" type="button" hidden></button>
+    </div>
+
+    <!-- 1. Appairage : le QR code et le code à taper -->
+    <section class="card pair" id="pair" aria-labelledby="pair-title">
+      <div class="pair-grid">
+        <div class="pair-text">
+          <h1 id="pair-title">Fais passer tes fichiers du PC au téléphone.</h1>
+          <p class="lead">Photos, vidéos, documents : ils filent directement d'un appareil à l'autre. Pas de câble, pas de compte.</p>
+          <ol class="steps steps-desktop">
+            <li>Scanne ce QR code avec l'appareil photo de ton téléphone.</li>
+            <li>Le téléphone ouvre ce site et se connecte tout seul.</li>
+            <li>Choisis tes fichiers, d'un côté ou de l'autre.</li>
+          </ol>
+          <ol class="steps steps-handheld">
+            <li><span>Ouvre <strong class="site-name">ce site</strong> sur ton ordinateur.</span></li>
+            <li>Scanne le QR code qui s'affiche avec l'appareil photo, ou tape son code ci-dessous.</li>
+          </ol>
+
+          <form class="join" id="join" novalidate>
+            <label for="join-code">Tu as le code d'un autre appareil ?</label>
+            <div class="join-row">
+              <input id="join-code" name="code" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="200" placeholder="ex. K7M Q2P" aria-describedby="join-error">
+              <button class="btn" type="submit">Connecter</button>
+            </div>
+            <p class="error" id="join-error" role="alert" hidden></p>
+          </form>
+          <button class="btn-quiet show-qr" id="show-qr" type="button" aria-expanded="false" aria-controls="qr-side">Afficher le code de ce téléphone</button>
+        </div>
+
+        <div class="qr-side" id="qr-side">
+          <div class="qr-wrap">
+            <div class="qr" id="qr" role="img" aria-label="QR code à scanner avec le téléphone"><div class="qr-empty">Préparation du code…</div></div>
+            <svg class="postmark" viewBox="0 0 120 120" aria-hidden="true">
+              <defs><path id="pm-arc" d="M60 60m-41 0a41 41 0 1 1 82 0a41 41 0 1 1-82 0"/></defs>
+              <circle cx="60" cy="60" r="55" stroke-width="3"/>
+              <circle cx="60" cy="60" r="31" stroke-width="1.5"/>
+              <text class="pm-ring"><textPath href="#pm-arc" textLength="250" lengthAdjust="spacing">PETIT BLEU ✦ PARIS ✦ PNEUMATIQUE ✦</textPath></text>
+              <text class="pm-date" id="pm-date" x="60" y="61" text-anchor="middle">·</text>
+              <text class="pm-time" id="pm-time" x="60" y="76" text-anchor="middle">·</text>
+            </svg>
+          </div>
+          <p class="qr-caption">Pas d'appareil photo ? Ouvre <strong class="site-name">ce site</strong> sur l'autre appareil et tape ce code :</p>
+          <p class="code" id="my-code">··· ···</p>
+          <button class="btn-quiet" id="copy-link" type="button" disabled>Copier le lien</button>
+          <p class="warning" id="file-warning" hidden>Tu as ouvert le fichier depuis ton disque : le téléphone ne peut pas le joindre. Mets le site en ligne pour que le QR code marche.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Connexion en cours -->
+    <section class="card connecting" id="connecting" hidden>
+      <p class="connecting-title" id="connecting-text">Connexion…</p>
+      <div class="tube" aria-hidden="true"><span class="fill"></span></div>
+      <p class="connecting-sub">Les deux appareils établissent une connexion directe. Ça prend quelques secondes.</p>
+      <button class="btn-quiet" id="cancel-connect" type="button">Annuler</button>
+    </section>
+
+    <!-- 3. Connecté : choisir les fichiers à envoyer -->
+    <section id="send" hidden>
+      <label class="slot" id="slot">
+        <input class="visually-hidden" id="file-input" type="file" multiple>
+        <svg class="slot-art" viewBox="0 0 120 72" aria-hidden="true">
+          <defs>
+            <linearGradient id="plate-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" style="stop-color: var(--brass-hi)"/>
+              <stop offset="1" style="stop-color: var(--brass)"/>
+            </linearGradient>
+            <clipPath id="slot-clip"><rect x="0" y="-40" width="120" height="93"/></clipPath>
+          </defs>
+          <rect class="plate" x="8" y="38" width="104" height="30" rx="15" fill="url(#plate-grad)"/>
+          <rect class="slit" x="26" y="48" width="68" height="10" rx="5"/>
+          <g clip-path="url(#slot-clip)">
+            <g class="capsule">
+              <rect class="capsule-body" x="49" y="6" width="22" height="44" rx="11"/>
+              <rect class="capsule-band" x="50" y="19" width="20" height="3.5"/>
+              <rect class="capsule-band" x="50" y="33.5" width="20" height="3.5"/>
+            </g>
+          </g>
+        </svg>
+        <span class="slot-title">Choisis des fichiers à envoyer</span>
+        <span class="slot-sub" id="slot-sub">ou glisse-les ici.</span>
+      </label>
+    </section>
+
+    <!-- La liste des fichiers envoyés et reçus (reste visible même après une déconnexion) -->
+    <section class="card files" id="files" aria-labelledby="files-title" hidden>
+      <div class="files-head">
+        <h2 id="files-title">Fichiers</h2>
+        <button class="btn-quiet" id="clear" type="button">Vider la liste</button>
+      </div>
+      <ul class="list" id="list"></ul>
+      <p class="tip" id="ios-tip" hidden>Sur iPhone, « Partager » puis « Enregistrer l'image » ou « Enregistrer la vidéo » range le fichier dans Photos. « Enregistrer » le met dans l'app Fichiers.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Les fichiers passent directement d'un appareil à l'autre, chiffrés, et ne sont stockés nulle part.</p>
+    <p>Le petit bleu, c'était le message express qui filait par tube pneumatique sous Paris.</p>
+  </footer>
+
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+    <div class="viewer-bar">
+      <p class="viewer-title" id="viewer-title"></p>
+      <button class="btn-quiet" id="viewer-close" type="button">Fermer</button>
+    </div>
+    <div class="viewer-body" id="viewer-body"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  <script>
+  (() => {
+    'use strict';
+
+    /* ============ Réglages ============ */
+    const CFG = {
+      idPrefix: 'petitbleu-',          // préfixe des identifiants sur le serveur PeerJS public
+      chunkSize: 64 * 1024,            // taille d'un morceau envoyé (64 Ko)
+      readSize: 1024 * 1024,           // on lit le fichier 1 Mo à la fois
+      highWater: 4 * 1024 * 1024,      // pause si plus de 4 Mo attendent de partir...
+      lowWater: 1024 * 1024,           // ...et reprise sous 1 Mo
+      connectTimeout: 20000,           // abandon si la connexion directe n'aboutit pas en 20 s
+    };
+    // Pas de 0/O ni de 1/I/L : impossible de les confondre en recopiant le code.
+    const ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+    const UA = navigator.userAgent;
+    const IS_IOS = /iPhone|iPad|iPod/.test(UA) || (/Macintosh/.test(UA) && navigator.maxTouchPoints > 1);
+    const IS_HANDHELD = IS_IOS || /Android/.test(UA);
+
+    // Types qu'on garde tels quels à la réception ; tout le reste est traité comme un fichier
+    // à télécharger (évite qu'un fichier HTML reçu s'ouvre comme une page du site).
+    const SAFE_TYPE = /^(image\/(png|jpeg|gif|webp|avif|heic|heif|bmp)|video\/(mp4|webm|quicktime|x-m4v|3gpp|ogg)|audio\/(mpeg|mp4|x-m4a|wav|x-wav|ogg|aac|flac|webm)|application\/pdf)$/;
+    const TYPE_BY_EXT = {
+      jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', gif: 'image/gif', webp: 'image/webp',
+      avif: 'image/avif', heic: 'image/heic', heif: 'image/heif', bmp: 'image/bmp',
+      mp4: 'video/mp4', m4v: 'video/x-m4v', mov: 'video/quicktime', webm: 'video/webm', '3gp': 'video/3gpp',
+      mp3: 'audio/mpeg', m4a: 'audio/mp4', wav: 'audio/wav', ogg: 'audio/ogg', aac: 'audio/aac', flac: 'audio/flac',
+      pdf: 'application/pdf',
+    };
+
+    /* ============ Éléments de la page ============ */
+    const $ = (id) => document.getElementById(id);
+    const els = {
+      lamp: $('lamp'), statusText: $('status-text'), disconnect: $('disconnect'),
+      banner: $('banner'), bannerText: $('banner-text'), bannerAction: $('banner-action'),
+      pair: $('pair'), joinForm: $('join'), joinInput: $('join-code'), joinError: $('join-error'),
+      qrSide: $('qr-side'), showQr: $('show-qr'), qr: $('qr'), myCode: $('my-code'),
+      copyLink: $('copy-link'), fileWarning: $('file-warning'),
+      connecting: $('connecting'), connectingText: $('connecting-text'), cancelConnect: $('cancel-connect'),
+      send: $('send'), slot: $('slot'), slotSub: $('slot-sub'), fileInput: $('file-input'),
+      files: $('files'), list: $('list'), clear: $('clear'), iosTip: $('ios-tip'),
+      viewer: $('viewer'), viewerTitle: $('viewer-title'), viewerBody: $('viewer-body'), viewerClose: $('viewer-close'),
+    };
+
+    /* ============ État ============ */
+    const state = {
+      peer: null,            // notre identité sur le serveur de mise en relation
+      myCode: null,          // le code à 6 caractères de cet appareil
+      wantTarget: null,      // code à appeler dès que le serveur nous a répondu
+      conn: null,            // la connexion directe avec l'autre appareil (une seule à la fois)
+      connOpened: false,
+      connectTimer: null,
+      remoteName: "l'autre appareil",
+      lastTarget: null,      // dernier code appelé, pour le bouton « Reconnecter »
+      retryTimer: null,
+      retries: 0,
+      queue: [],             // fichiers en attente d'envoi
+      sending: false,
+      awaiting: new Map(),   // fichiers envoyés dont on attend l'accusé de réception
+      incoming: null,        // fichier en cours de réception
+      nextId: 1,
+      items: new Set(),      // lignes affichées dans la liste
+      wakeLock: null,
+      viewerReturn: null,
+    };
+
+    /* ============ Petits outils ============ */
+    function randomCode() {
+      const values = crypto.getRandomValues(new Uint32Array(6));
+      return Array.from(values, (n) => ALPHABET[n % ALPHABET.length]).join('');
+    }
+    function normalizeCode(text) {
+      let s = String(text || '').trim();
+      const hash = s.lastIndexOf('#');           // on accepte aussi un lien collé en entier
+      if (hash >= 0) s = s.slice(hash + 1);
+      try { s = decodeURIComponent(s); } catch (e) { /* tant pis */ }
+      return s.toUpperCase().replace(/[\s._-]/g, '');
+    }
+    const isValidCode = (c) => c.length === 6 && [...c].every((ch) => ALPHABET.includes(ch));
+    const prettyCode = (c) => c.slice(0, 3) + ' ' + c.slice(3);
+    const peerIdFor = (code) => CFG.idPrefix + code.toLowerCase();
+
+    function formatBytes(n) {
+      if (n < 1024) return Math.round(n) + ' o';
+      const units = ['Ko', 'Mo', 'Go', 'To'];
+      let i = -1;
+      do { n /= 1024; i++; } while (n >= 1024 && i < units.length - 1);
+      return n.toLocaleString('fr-FR', { maximumFractionDigits: n < 10 ? 1 : 0 }) + ' ' + units[i];
+    }
+    function extensionOf(name) {
+      const m = /\.([a-z0-9]{1,5})$/i.exec(name || '');
+      return m ? m[1].toLowerCase() : '';
+    }
+    function cleanName(text) {
+      return String(text || '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 40);
+    }
+    function cleanFileName(name) {
+      let n = String(name || '').replace(/[\u0000-\u001f\u007f\/\\]/g, '_').trim();
+      if (!n || n === '.' || n === '..') n = 'fichier';
+      return n.slice(0, 180);
+    }
+    function receivedType(declared, name) {
+      const t = String(declared || '').toLowerCase();
+      if (SAFE_TYPE.test(t)) return t;
+      return TYPE_BY_EXT[extensionOf(name)] || 'application/octet-stream';
+    }
+    function previewKind(type) {
+      if (/^image\/(png|jpeg|gif|webp|avif|bmp)$/.test(type)) return 'image';
+      if (/^video\/(mp4|webm|quicktime|x-m4v)$/.test(type)) return 'video';
+      return null;
+    }
+    function deviceName() {
+      if (/iPhone/.test(UA)) return 'iPhone';
+      if (/iPad/.test(UA) || (/Macintosh/.test(UA) && navigator.maxTouchPoints > 1)) return 'iPad';
+      if (/Android/.test(UA)) return /Mobile/.test(UA) ? 'téléphone Android' : 'tablette Android';
+      if (/Windows/.test(UA)) return 'PC Windows';
+      if (/CrOS/.test(UA)) return 'Chromebook';
+      if (/Macintosh|Mac OS X/.test(UA)) return 'Mac';
+      if (/Linux/.test(UA)) return 'PC Linux';
+      return 'appareil';
+    }
+    function siteBase() {
+      return location.protocol === 'file:' ? location.href.split('#')[0] : location.origin + location.pathname;
+    }
+    function siteLabel() {
+      return siteBase().replace(/^https?:\/\//, '').replace(/index\.html$/, '').replace(/\/$/, '');
+    }
+    function savedCode() {
+      try { return sessionStorage.getItem('petitbleu-code'); } catch (e) { return null; }
+    }
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = text;   // textContent : jamais de HTML venu de l'autre appareil
+      return node;
+    }
+    // Le canal peut être en train de se fermer alors que PeerJS le croit encore ouvert.
+    const canSend = (conn) => !!(conn && conn.open && (!conn.dataChannel || conn.dataChannel.readyState === 'open'));
+    const isConnected = () => !!(state.connOpened && canSend(state.conn));
+
+    /* ============ Affichage ============ */
+    function setStatus(kind, text) {
+      els.lamp.dataset.kind = kind;
+      els.statusText.textContent = text;
+    }
+    function setView(view) {
+      els.pair.hidden = view !== 'pair';
+      els.connecting.hidden = view !== 'connecting';
+      els.send.hidden = view !== 'connected';
+      els.disconnect.hidden = view !== 'connected';
+    }
+    function showBanner(text, kind, action) {
+      els.bannerText.textContent = text;
+      els.banner.dataset.kind = kind || 'info';
+      els.bannerAction.hidden = !action;
+      els.bannerAction.onclick = action ? () => { hideBanner(); action.run(); } : null;
+      if (action) els.bannerAction.textContent = action.label;
+      els.banner.hidden = false;
+    }
+    function hideBanner() { els.banner.hidden = true; }
+    function showJoinError(text) { els.joinError.textContent = text; els.joinError.hidden = false; }
+    function hideJoinError() { els.joinError.hidden = true; }
+    function waitingStatus() { setStatus('idle', "En attente d'un appareil"); }
+    function fatal(text) {
+      showBanner(text, 'error');
+      setStatus('error', 'Indisponible');
+      setView('pair');
+      els.qr.innerHTML = '<div class="qr-empty">QR code indisponible</div>';
+    }
+
+    /* ============ QR code façon timbre-poste ============ */
+    function renderMyCode() {
+      const code = state.myCode;
+      const link = siteBase() + '#' + code;
+      els.myCode.textContent = prettyCode(code);
+      document.querySelectorAll('.site-name').forEach((n) => { n.textContent = siteLabel(); });
+      els.fileWarning.hidden = location.protocol !== 'file:';
+      els.copyLink.disabled = false;
+      els.copyLink.onclick = () => copyLink(link);
+      if (typeof window.qrcode !== 'function') {
+        els.qr.innerHTML = '<div class="qr-empty">QR code indisponible : tape le code ci-dessous.</div>';
+        return;
+      }
+      els.qr.innerHTML = stampSvg(link);
+    }
+    function stampSvg(text) {
+      const qr = window.qrcode(0, 'M');
+      qr.addData(text);
+      qr.make();
+      const n = qr.getModuleCount();
+      const margin = 6;                         // marge blanche (obligatoire pour qu'un QR soit lisible)
+      const size = n + margin * 2;
+      let ink = '';
+      for (let r = 0; r < n; r++) {
+        for (let c = 0; c < n; c++) {
+          if (qr.isDark(r, c)) ink += `M${c + margin} ${r + margin}h1v1h-1z`;
+        }
+      }
+      return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">` +
+        `<path class="stamp-paper" d="${perforatedSquare(size, 0.6, 1.7)}"/>` +
+        `<path class="stamp-ink" shape-rendering="crispEdges" d="${ink}"/></svg>`;
+    }
+    // Un carré dont les bords sont percés de demi-cercles, comme un timbre.
+    function perforatedSquare(size, r, step) {
+      const count = Math.max(4, Math.round(size / step));
+      const gap = size / count;
+      const f = (v) => +v.toFixed(3);
+      let d = 'M0 0';
+      for (let i = 0; i < count; i++) { const x = gap * (i + 0.5); d += `L${f(x - r)} 0A${r} ${r} 0 0 0 ${f(x + r)} 0`; }
+      d += `L${size} 0`;
+      for (let i = 0; i < count; i++) { const y = gap * (i + 0.5); d += `L${size} ${f(y - r)}A${r} ${r} 0 0 0 ${size} ${f(y + r)}`; }
+      d += `L${size} ${size}`;
+      for (let i = 0; i < count; i++) { const x = size - gap * (i + 0.5); d += `L${f(x + r)} ${size}A${r} ${r} 0 0 0 ${f(x - r)} ${size}`; }
+      d += `L0 ${size}`;
+      for (let i = 0; i < count; i++) { const y = size - gap * (i + 0.5); d += `L0 ${f(y + r)}A${r} ${r} 0 0 0 0 ${f(y - r)}`; }
+      return d + 'Z';
+    }
+    async function copyLink(link) {
+      try {
+        await navigator.clipboard.writeText(link);
+        els.copyLink.textContent = 'Lien copié';
+      } catch (e) {
+        els.copyLink.textContent = 'Copie impossible';
+      }
+      setTimeout(() => { els.copyLink.textContent = 'Copier le lien'; }, 2000);
+    }
+
+    /* ============ Mise en relation (serveur PeerJS) ============ */
+    function startPeer(preferredCode) {
+      const PeerClass = window.Peer || (window.peerjs && window.peerjs.Peer);
+      const code = preferredCode && isValidCode(preferredCode) ? preferredCode : randomCode();
+      let peer;
+      try {
+        peer = new PeerClass(peerIdFor(code), { debug: 1 });
+      } catch (err) {
+        console.warn('[PeerJS]', err);
+        fatal("Impossible de démarrer la connexion. Recharge la page ; si ça continue, essaie un autre navigateur.");
+        return;
+      }
+      state.peer = peer;
+      if (!isConnected()) setStatus('wait', 'Connexion au serveur…');
+
+      peer.on('open', () => {
+        if (peer !== state.peer) return;
+        state.myCode = code;
+        state.retries = 0;
+        try { sessionStorage.setItem('petitbleu-code', code); } catch (e) { /* navigation privée */ }
+        renderMyCode();
+        if (state.wantTarget) {
+          const target = state.wantTarget;
+          state.wantTarget = null;
+          connectTo(target);
+        } else if (!state.conn) {
+          waitingStatus();
+        }
+      });
+      // Un autre appareil vient de scanner notre QR code ou de taper notre code.
+      peer.on('connection', (conn) => {
+        if (peer === state.peer) adoptConnection(conn, false);
+      });
+      // Coupé du serveur (pas de l'autre appareil) : les transferts continuent, on se reconnecte.
+      peer.on('disconnected', () => {
+        if (peer === state.peer && !peer.destroyed) scheduleServerRetry();
+      });
+      peer.on('error', (err) => onPeerError(peer, err));
+    }
+
+    function onPeerError(peer, err) {
+      if (peer !== state.peer) return;
+      const type = err && err.type;
+      console.warn('[PeerJS]', type, err);
+      switch (type) {
+        case 'unavailable-id':
+          // Ce code est déjà utilisé quelque part : on en tire un autre.
+          peer.destroy();
+          startPeer(null);
+          break;
+        case 'peer-unavailable': {
+          const code = state.lastTarget || '';
+          dropConnection();
+          clearHash();
+          state.lastTarget = null;
+          setView('pair');
+          waitingStatus();
+          showJoinError(`Aucun appareil n'utilise le code ${prettyCode(code)} en ce moment. Vérifie le code affiché sur l'autre appareil : il change à chaque ouverture de la page.`);
+          break;
+        }
+        case 'browser-incompatible':
+          fatal('Ce navigateur ne sait pas faire de connexion directe (WebRTC). Essaie avec Chrome, Firefox, Edge ou Safari à jour.');
+          break;
+        case 'network':
+        case 'server-error':
+        case 'socket-error':
+        case 'socket-closed':
+        case 'disconnected':
+          if (!isConnected()) setStatus('error', 'Serveur injoignable, nouvel essai…');
+          scheduleServerRetry();
+          break;
+        default:
+          if (state.conn && !state.connOpened) failConnection(state.conn, "La connexion n'a pas pu s'établir. Réessaie dans un instant.");
+          else if (!isConnected()) setStatus('error', 'Erreur de connexion');
+      }
+    }
+
+    function scheduleServerRetry() {
+      if (state.retryTimer) return;
+      const delay = Math.min(15000, 2000 * 2 ** Math.min(state.retries, 3));
+      state.retries++;
+      state.retryTimer = setTimeout(() => {
+        state.retryTimer = null;
+        const peer = state.peer;
+        if (!peer || peer.destroyed) {
+          startPeer(state.myCode || savedCode());
+        } else if (peer.disconnected) {
+          try { peer.reconnect(); } catch (e) { scheduleServerRetry(); }
+        }
+      }, delay);
+    }
+
+    /* ============ Connexion directe avec l'autre appareil ============ */
+    function connectTo(rawCode) {
+      const code = normalizeCode(rawCode);
+      hideJoinError();
+      if (!isValidCode(code)) return showJoinError('Un code fait 6 caractères, par exemple K7M Q2P.');
+      if (code === state.myCode) return showJoinError("C'est le code de cet appareil. Tape celui qui s'affiche sur l'autre appareil.");
+      hideBanner();
+      state.remoteName = "l'autre appareil";
+      els.connectingText.textContent = `Connexion à l'appareil ${prettyCode(code)}…`;
+      setView('connecting');
+      setStatus('wait', 'Connexion…');
+      // Pas (ou plus) relié au serveur, par exemple au retour d'une autre app sur iPhone :
+      // on appellera ce code dès que le serveur nous aura de nouveau répondu.
+      const peer = state.peer;
+      if (!peer || !peer.open || peer.disconnected) {
+        state.wantTarget = code;
+        if (peer && (peer.disconnected || peer.destroyed)) scheduleServerRetry();
+        return;
+      }
+      state.lastTarget = code;
+      const conn = peer.connect(peerIdFor(code), {
+        reliable: true,                 // morceaux livrés dans l'ordre, sans perte
+        serialization: 'raw',           // on envoie nous-mêmes du texte (JSON) et des morceaux binaires
+        metadata: { name: deviceName() },
+      });
+      if (!conn) {                      // PeerJS refuse quand il vient de perdre le serveur
+        state.wantTarget = code;
+        scheduleServerRetry();
+        return;
+      }
+      adoptConnection(conn, true);
+    }
+
+    function adoptConnection(conn, outgoing) {
+      // Une seule connexion à la fois : la plus récente remplace l'ancienne.
+      if (state.conn && state.conn !== conn) dropConnection();
+      state.conn = conn;
+      state.connOpened = false;
+      clearTimeout(state.connectTimer);
+      state.connectTimer = setTimeout(() => {
+        failConnection(conn, "La connexion directe n'a pas abouti. Vérifie que les deux appareils ont internet ; sur le même Wi-Fi, c'est plus fiable.");
+      }, CFG.connectTimeout);
+
+      if (!outgoing) {
+        state.remoteName = cleanName(conn.metadata && conn.metadata.name) || "l'autre appareil";
+        els.connectingText.textContent = `Connexion avec ${state.remoteName}…`;
+        setView('connecting');
+        setStatus('wait', 'Connexion…');
+        hideBanner();
+      }
+
+      conn.on('open', () => { if (state.conn === conn) onOpen(conn); });
+      conn.on('data', (data) => { if (state.conn === conn) onData(data); });
+      conn.on('close', () => { if (state.conn === conn) onLost(conn); });
+      conn.on('error', (err) => console.warn('[connexion]', err && err.type, err));
+      conn.on('iceStateChanged', (iceState) => {
+        if (state.conn !== conn) return;
+        if (iceState === 'disconnected' && state.connOpened) setStatus('wait', 'Connexion instable…');
+        if ((iceState === 'connected' || iceState === 'completed') && state.connOpened) setStatus('ok', 'Connecté à ' + state.remoteName);
+        if (iceState === 'failed') onLost(conn);
+      });
+    }
+
+    function onOpen(conn) {
+      clearTimeout(state.connectTimer);
+      state.connOpened = true;
+      try { conn.dataChannel.bufferedAmountLowThreshold = CFG.lowWater; } catch (e) { /* facultatif */ }
+      sendControl({ t: 'hello', name: deviceName() });
+      hideBanner();
+      hideJoinError();
+      setStatus('ok', 'Connecté à ' + state.remoteName);
+      updateSendCopy();
+      setView('connected');
+      pumpQueue();
+    }
+
+    function onLost(conn) {
+      if (state.conn !== conn) return;
+      const wasOpen = state.connOpened;
+      const name = state.remoteName;
+      dropConnection();
+      if (!wasOpen) {
+        failMessage("La connexion directe n'a pas abouti. Vérifie que les deux appareils ont internet ; sur le même Wi-Fi, c'est plus fiable.");
+        return;
+      }
+      setView('pair');
+      waitingStatus();
+      const target = state.lastTarget;
+      if (target) {
+        showBanner(`Connexion perdue avec ${name}.`, 'info', { label: 'Reconnecter', run: () => connectTo(target) });
+      } else {
+        showBanner(`Connexion perdue avec ${name}. Scanne de nouveau le QR code pour reprendre.`, 'info');
+      }
+    }
+
+    function failConnection(conn, message) {
+      if (state.conn !== conn || state.connOpened) return;
+      dropConnection();
+      failMessage(message);
+    }
+    function failMessage(message) {
+      setView('pair');
+      setStatus('error', 'Échec de la connexion');
+      showJoinError(message);
+    }
+
+    // Ferme la connexion actuelle sans rien afficher (les appelants s'en chargent).
+    function dropConnection() {
+      const conn = state.conn;
+      state.conn = null;
+      state.connOpened = false;
+      clearTimeout(state.connectTimer);
+      abortTransfers();
+      if (conn) { try { conn.close(); } catch (e) { /* déjà fermée */ } }
+    }
+
+    function disconnect() {
+      state.lastTarget = null;
+      state.wantTarget = null;
+      clearHash();
+      dropConnection();
+      hideBanner();
+      setView('pair');
+      waitingStatus();
+    }
+
+    /* ============ Messages entre les deux appareils ============
+       Texte (JSON) pour les messages de service, binaire pour les morceaux de fichier :
+       { t: 'hello', name }                      : présentation
+       { t: 'file', id, name, size, type }       : un fichier arrive, suivi de ses morceaux binaires
+       { t: 'end', id } / { t: 'cancel', id }    : fin du fichier / envoi annulé
+       { t: 'ack', id }                          : accusé de réception                           */
+    function sendControl(message) {
+      const conn = state.conn;
+      if (canSend(conn)) conn.send(JSON.stringify(message));
+    }
+
+    function onData(data) {
+      if (typeof data === 'string') {
+        let message;
+        try { message = JSON.parse(data); } catch (e) { return; }
+        if (message && typeof message === 'object') onControl(message);
+        return;
+      }
+      const rx = state.incoming;
+      if (!rx) return;                                   // morceau inattendu : ignoré
+      const size = data.byteLength != null ? data.byteLength : (data.size || 0);
+      rx.parts.push(data);
+      rx.received += size;
+      paintProgress(rx.item, rx.received, rx.size, rx.startedAt);
+    }
+
+    function onControl(message) {
+      switch (message.t) {
+        case 'hello':
+          state.remoteName = cleanName(message.name) || state.remoteName;
+          if (isConnected()) setStatus('ok', 'Connecté à ' + state.remoteName);
+          updateSendCopy();
+          break;
+        case 'file': {
+          if (state.incoming) failItem(state.incoming.item, 'Réception interrompue');
+          const name = cleanFileName(message.name);
+          const size = Math.max(0, Number(message.size) || 0);
+          const item = addItem('in', name, size);
+          state.incoming = { id: message.id, name, size, type: receivedType(message.type, name), parts: [], received: 0, startedAt: performance.now(), item };
+          paintProgress(item, 0, size, state.incoming.startedAt, true);
+          keepAwake();
+          break;
+        }
+        case 'end': {
+          const rx = state.incoming;
+          if (!rx || rx.id !== message.id) return;
+          state.incoming = null;
+          if (rx.received !== rx.size) {
+            failItem(rx.item, 'Fichier incomplet, renvoie-le');
+          } else {
+            finishIncoming(rx);
+            sendControl({ t: 'ack', id: rx.id });
+          }
+          keepAwake();
+          break;
+        }
+        case 'cancel': {
+          const rx = state.incoming;
+          if (rx && rx.id === message.id) {
+            state.incoming = null;
+            failItem(rx.item, `Envoi annulé par ${state.remoteName}`);
+            keepAwake();
+          }
+          break;
+        }
+        case 'ack': {
+          const item = state.awaiting.get(message.id);
+          if (item) {
+            state.awaiting.delete(message.id);
+            setItemState(item, 'done', `Bien reçu par ${state.remoteName}`);
+          }
+          break;
+        }
+      }
+    }
+
+    /* ============ Envoi ============ */
+    function enqueue(fileList) {
+      const files = Array.from(fileList || []);
+      if (!files.length) return;
+      if (!isConnected()) {
+        showBanner("Connecte d'abord un appareil, puis choisis tes fichiers.", 'info');
+        return;
+      }
+      for (const file of files) {
+        const item = addItem('out', file.name || 'fichier', file.size);
+        setItemState(item, 'queued', 'En attente');
+        setThumb(item, file, file.type || TYPE_BY_EXT[extensionOf(file.name)] || '');
+        state.queue.push({ file, item });
+      }
+      pumpQueue();
+    }
+
+    async function pumpQueue() {
+      if (state.sending) return;
+      state.sending = true;
+      keepAwake();
+      try {
+        while (state.queue.length && isConnected()) {
+          const job = state.queue.shift();
+          try {
+            await sendFile(job);
+          } catch (err) {
+            console.warn('[envoi]', err);
+            failItem(job.item, err.unreadable ? 'Impossible de lire ce fichier (un dossier ?)' : 'Envoi interrompu');
+          }
+        }
+      } finally {
+        state.sending = false;
+        keepAwake();
+      }
+    }
+
+    async function sendFile({ file, item }) {
+      const conn = state.conn;
+      // On vérifie d'abord que le fichier se lit (un dossier glissé, par exemple, ne se lit pas).
+      try { await file.slice(0, 1).arrayBuffer(); } catch (e) { e.unreadable = true; throw e; }
+
+      if (state.conn !== conn || !canSend(conn)) throw new Error('connexion perdue');
+      const id = state.nextId++;
+      const startedAt = performance.now();
+      conn.send(JSON.stringify({ t: 'file', id, name: file.name || 'fichier', size: file.size, type: file.type || '' }));
+      paintProgress(item, 0, file.size, startedAt, true);
+
+      let offset = 0;
+      try {
+        while (offset < file.size) {
+          const buffer = await file.slice(offset, offset + CFG.readSize).arrayBuffer();
+          if (!buffer.byteLength) throw new Error('lecture vide');
+          for (let i = 0; i < buffer.byteLength; i += CFG.chunkSize) {
+            await roomToSend(conn);
+            if (state.conn !== conn || !canSend(conn)) throw new Error('connexion perdue');
+            conn.send(buffer.slice(i, i + CFG.chunkSize));
+          }
+          offset += buffer.byteLength;
+          paintProgress(item, offset, file.size, startedAt);
+        }
+      } catch (err) {
+        if (state.conn === conn && canSend(conn)) conn.send(JSON.stringify({ t: 'cancel', id }));
+        throw err;
+      }
+      if (state.conn !== conn || !canSend(conn)) throw new Error('connexion perdue');
+      conn.send(JSON.stringify({ t: 'end', id }));
+      setItemState(item, 'sent', `Envoyé, en attente de confirmation de ${state.remoteName}…`);
+      state.awaiting.set(id, item);
+    }
+
+    // Contrôle du débit : on n'empile pas tout le fichier en mémoire, on attend que ça parte.
+    function roomToSend(conn) {
+      const channel = conn.dataChannel;
+      const busy = () => conn.open && channel && (channel.bufferedAmount > CFG.highWater || conn.bufferSize > 0);
+      if (!busy()) return Promise.resolve();
+      return new Promise((resolve) => {
+        const check = () => {
+          if (conn.open && channel.bufferedAmount > CFG.lowWater) return;
+          if (conn.open && conn.bufferSize > 0) return;
+          clearInterval(timer);
+          channel.removeEventListener('bufferedamountlow', check);
+          resolve();
+        };
+        channel.addEventListener('bufferedamountlow', check);
+        const timer = setInterval(check, 50);           // filet de sécurité
+      });
+    }
+
+    // La connexion est coupée : tout ce qui était en route est marqué comme interrompu.
+    function abortTransfers() {
+      for (const job of state.queue) failItem(job.item, 'Pas envoyé : connexion coupée');
+      state.queue.length = 0;
+      for (const item of state.awaiting.values()) setItemState(item, 'sent', 'Envoyé, sans confirmation de réception');
+      state.awaiting.clear();
+      if (state.incoming) {
+        failItem(state.incoming.item, 'Réception interrompue');
+        state.incoming = null;
+      }
+      keepAwake();
+    }
+
+    /* ============ Réception ============ */
+    function finishIncoming(rx) {
+      const blob = new Blob(rx.parts, { type: rx.type });
+      rx.parts = null;
+      const item = rx.item;
+      const url = trackUrl(item, URL.createObjectURL(blob));
+      setItemState(item, 'done', `Reçu de ${state.remoteName}`);
+
+      // Sur iPhone, une photo ou une vidéo va dans Photos via « Partager » : c'est alors le bouton principal.
+      let file = null;
+      try { file = new File([blob], rx.name, { type: rx.type }); } catch (e) { /* vieux navigateur */ }
+      const shareable = IS_HANDHELD && file && canShare(file);
+      const shareFirst = shareable && IS_IOS && !!previewKind(rx.type);
+
+      const save = el('a', shareFirst ? 'btn-quiet' : 'btn', 'Enregistrer');
+      save.href = url;
+      save.download = rx.name;
+      item.actions.append(save);
+      if (shareable) {
+        const share = el('button', shareFirst ? 'btn' : 'btn-quiet', 'Partager');
+        share.type = 'button';
+        share.addEventListener('click', () => {
+          navigator.share({ files: [file] }).catch((err) => {
+            if (err && err.name !== 'AbortError') showBanner('Partage impossible : utilise « Enregistrer ».', 'info');
+          });
+        });
+        if (shareFirst) item.actions.prepend(share); else item.actions.append(share);
+      }
+      setThumb(item, blob, rx.type, url);
+      item.li.classList.add('arrived');
+      if (IS_IOS) els.iosTip.hidden = false;
+    }
+    function canShare(file) {
+      try { return !!(navigator.canShare && navigator.canShare({ files: [file] })); } catch (e) { return false; }
+    }
+
+    /* ============ Liste des fichiers ============ */
+    function addItem(dir, name, size) {
+      const li = el('li', 'item');
+      li.dataset.dir = dir;
+      li.dataset.state = 'active';
+      const thumb = el('div', 'thumb', (extensionOf(name) || '···').toUpperCase().slice(0, 4));
+      const meta = el('div', 'meta');
+      const top = el('div', 'meta-top');
+      top.append(el('p', 'name', name), el('p', 'size', formatBytes(size)));
+      const stateText = el('p', 'state');
+      const tube = el('div', 'tube');
+      tube.setAttribute('role', 'progressbar');
+      tube.setAttribute('aria-valuemin', '0');
+      tube.setAttribute('aria-valuemax', '100');
+      tube.setAttribute('aria-label', 'Progression : ' + name);
+      const fill = el('span', 'fill');
+      tube.append(fill);
+      meta.append(top, stateText, tube);
+      const actions = el('div', 'actions');
+      li.append(thumb, meta, actions);
+      els.list.prepend(li);
+
+      const item = { li, thumb, stateText, tube, fill, actions, dir, name, urls: [], lastPaint: 0, lastPct: -1 };
+      state.items.add(item);
+      els.files.hidden = false;
+      return item;
+    }
+
+    function setItemState(item, kind, text) {
+      item.li.dataset.state = kind;
+      item.stateText.textContent = text;
+    }
+    function failItem(item, text) { setItemState(item, 'error', text); }
+
+    function paintProgress(item, done, total, startedAt, force) {
+      const pct = total ? Math.min(100, Math.floor((done / total) * 100)) : 100;
+      const now = performance.now();
+      if (!force && pct === item.lastPct && now - item.lastPaint < 400) return;   // pas besoin de redessiner
+      item.lastPct = pct;
+      item.lastPaint = now;
+      item.li.dataset.state = 'active';
+      item.fill.style.setProperty('--p', pct + '%');
+      item.tube.setAttribute('aria-valuenow', String(pct));
+      const seconds = (now - startedAt) / 1000;
+      const speed = seconds > 0.5 ? done / seconds : 0;
+      const verb = item.dir === 'out' ? `Envoi vers ${state.remoteName}` : `Réception depuis ${state.remoteName}`;
+      item.stateText.textContent = `${verb} : ${pct} %` + (speed ? ` (${formatBytes(speed)}/s)` : '');
+    }
+
+    function trackUrl(item, url) { item.urls.push(url); return url; }
+
+    function setThumb(item, blob, type, existingUrl) {
+      const kind = previewKind(type);
+      if (!kind) return;
+      const url = existingUrl || trackUrl(item, URL.createObjectURL(blob));
+      const button = el('button', 'thumb');
+      button.type = 'button';
+      button.setAttribute('aria-label', 'Aperçu de ' + item.name);
+      if (kind === 'image') {
+        const img = new Image();
+        img.alt = '';
+        img.decoding = 'async';
+        img.src = url;
+        button.append(img);
+      } else {
+        button.textContent = '▶';
+      }
+      button.addEventListener('click', () => openViewer(url, kind, item.name));
+      item.thumb.replaceWith(button);
+      item.thumb = button;
+    }
+
+    function clearList() {
+      for (const item of [...state.items]) {
+        const kind = item.li.dataset.state;
+        if (kind === 'active' || kind === 'queued') continue;          // on garde ce qui est en cours
+        if (kind === 'sent' && [...state.awaiting.values()].includes(item)) continue;
+        item.urls.forEach((u) => URL.revokeObjectURL(u));
+        item.li.remove();
+        state.items.delete(item);
+      }
+      if (!state.items.size) {
+        els.files.hidden = true;
+        els.iosTip.hidden = true;
+      }
+    }
+
+    function updateSendCopy() {
+      els.slotSub.textContent = IS_HANDHELD
+        ? `Photos, vidéos, documents… Ils arriveront sur ${state.remoteName}.`
+        : `ou glisse-les ici. Ils arriveront sur ${state.remoteName}.`;
+    }
+
+    /* ============ Aperçu plein écran ============ */
+    function openViewer(url, kind, name) {
+      state.viewerReturn = document.activeElement;
+      let media;
+      if (kind === 'image') {
+        media = new Image();
+        media.alt = name;
+      } else {
+        media = document.createElement('video');
+        media.controls = true;
+        media.playsInline = true;
+        media.preload = 'metadata';
+      }
+      media.src = url;
+      els.viewerBody.replaceChildren(media);
+      els.viewerTitle.textContent = name;
+      els.viewer.hidden = false;
+      els.viewerClose.focus();
+    }
+    function closeViewer() {
+      if (els.viewer.hidden) return;
+      const video = els.viewerBody.querySelector('video');
+      if (video) video.pause();
+      els.viewer.hidden = true;
+      els.viewerBody.replaceChildren();
+      if (state.viewerReturn && state.viewerReturn.focus) state.viewerReturn.focus();
+    }
+
+    /* ============ Garder l'écran allumé pendant un transfert ============ */
+    async function keepAwake() {
+      const busy = state.sending || !!state.incoming;
+      try {
+        if (busy && !state.wakeLock && 'wakeLock' in navigator && document.visibilityState === 'visible') {
+          state.wakeLock = 'pending';
+          const lock = await navigator.wakeLock.request('screen');
+          state.wakeLock = lock;
+          lock.addEventListener('release', () => { if (state.wakeLock === lock) state.wakeLock = null; });
+          if (!(state.sending || state.incoming)) keepAwake();
+        } else if (!busy && state.wakeLock && state.wakeLock !== 'pending') {
+          const lock = state.wakeLock;
+          state.wakeLock = null;
+          await lock.release();
+        }
+      } catch (e) {
+        if (state.wakeLock === 'pending') state.wakeLock = null;
+      }
+    }
+
+    /* ============ Adresse de la page (#CODE) ============ */
+    function codeFromHash() {
+      const code = normalizeCode(location.hash.slice(1));
+      return isValidCode(code) ? code : null;
+    }
+    function clearHash() {
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    }
+
+    // Le cachet du timbre porte la date et l'heure du jour, comme un vrai tampon de la poste.
+    function stampPostmark() {
+      const months = ['JANV', 'FÉVR', 'MARS', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEPT', 'OCT', 'NOV', 'DÉC'];
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      $('pm-date').textContent = `${now.getDate()} ${months[now.getMonth()]} ${String(now.getFullYear()).slice(2)}`;
+      $('pm-time').textContent = `${pad(now.getHours())}H${pad(now.getMinutes())}`;
+    }
+
+    /* ============ Démarrage ============ */
+    function init() {
+      document.documentElement.classList.toggle('is-handheld', IS_HANDHELD);
+      document.querySelectorAll('.site-name').forEach((n) => { n.textContent = siteLabel(); });
+      stampPostmark();
+
+      els.joinForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        connectTo(els.joinInput.value);
+      });
+      els.showQr.addEventListener('click', () => {
+        const open = els.qrSide.classList.toggle('open');
+        els.showQr.setAttribute('aria-expanded', String(open));
+        els.showQr.textContent = open ? 'Masquer le code de ce téléphone' : 'Afficher le code de ce téléphone';
+      });
+      els.cancelConnect.addEventListener('click', disconnect);
+      els.disconnect.addEventListener('click', disconnect);
+      els.fileInput.addEventListener('change', () => {
+        enqueue(els.fileInput.files);
+        els.fileInput.value = '';                         // pour pouvoir renvoyer le même fichier
+      });
+      els.clear.addEventListener('click', clearList);
+      els.viewerClose.addEventListener('click', closeViewer);
+      els.viewer.addEventListener('click', (event) => {
+        if (event.target === els.viewer || event.target === els.viewerBody) closeViewer();
+      });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeViewer(); });
+
+      // Glisser-déposer n'importe où sur la page.
+      const hasFiles = (event) => !!event.dataTransfer && Array.from(event.dataTransfer.types || []).includes('Files');
+      ['dragenter', 'dragover'].forEach((type) => window.addEventListener(type, (event) => {
+        if (!hasFiles(event)) return;
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'copy';
+        els.slot.classList.toggle('over', isConnected());
+      }));
+      window.addEventListener('dragleave', (event) => {
+        if (!event.relatedTarget) els.slot.classList.remove('over');
+      });
+      window.addEventListener('drop', (event) => {
+        if (!hasFiles(event)) return;
+        event.preventDefault();
+        els.slot.classList.remove('over');
+        enqueue(event.dataTransfer.files);
+      });
+      // Coller une image (Ctrl+V) l'envoie directement.
+      window.addEventListener('paste', (event) => {
+        const files = event.clipboardData ? Array.from(event.clipboardData.files) : [];
+        if (!files.length || !isConnected()) return;
+        if (event.target.closest && event.target.closest('input, textarea')) return;
+        event.preventDefault();
+        enqueue(files);
+      });
+
+      window.addEventListener('hashchange', () => {
+        const code = codeFromHash();
+        if (code && code !== state.myCode && !(isConnected() && state.lastTarget === code)) connectTo(code);
+      });
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'visible') return;
+        keepAwake();
+        const peer = state.peer;
+        if (peer && (peer.destroyed || peer.disconnected)) scheduleServerRetry();
+      });
+      window.addEventListener('beforeunload', (event) => {
+        if (state.sending || state.incoming) { event.preventDefault(); event.returnValue = ''; }
+      });
+      window.addEventListener('pagehide', () => {
+        if (state.conn) { try { state.conn.close(); } catch (e) { /* rien */ } }
+      });
+      window.addEventListener('pageshow', (event) => { if (event.persisted) location.reload(); });
+
+      const PeerClass = window.Peer || (window.peerjs && window.peerjs.Peer);
+      if (!PeerClass) {
+        fatal("Le site n'a pas pu charger PeerJS, la bibliothèque qui relie les appareils. Vérifie ta connexion internet, puis recharge la page.");
+        return;
+      }
+      if (!('RTCPeerConnection' in window)) {
+        fatal('Ce navigateur ne sait pas faire de connexion directe (WebRTC). Essaie avec Chrome, Firefox, Edge ou Safari à jour.');
+        return;
+      }
+
+      const target = codeFromHash();
+      if (target) {
+        state.wantTarget = target;
+        els.connectingText.textContent = `Connexion à l'appareil ${prettyCode(target)}…`;
+        setView('connecting');
+      }
+      startPeer(savedCode());
+    }
+
+    init();
+  })();
+  </script>
+</body>
+</html>
