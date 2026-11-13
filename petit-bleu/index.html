@@ -161,6 +161,7 @@
     border-radius: 999px;
     background: color-mix(in srgb, var(--sheet) 60%, transparent);
     cursor: pointer;
+    transition: background-color .25s ease, border-color .25s ease;   /* même durée que le fondu de la page */
   }
   .theme-switch:hover { border-color: var(--ink-2); }
   .ts-icon {
@@ -184,9 +185,14 @@
     border-radius: 50%;
     background: var(--accent);
     box-shadow: 0 1px 3px rgba(20, 36, 73, .35);
-    transition: transform .28s cubic-bezier(.3, .7, .4, 1);
+    transition: transform .28s cubic-bezier(.3, .7, .4, 1), background-color .25s ease;
   }
   .theme-switch[aria-checked="true"] .ts-knob { transform: translateX(28px); }
+  /* Pendant le fondu entre les thèmes, l'interrupteur reste « vivant » au-dessus : sinon la photo de
+     l'ancien écran laisse une deuxième bille, figée, qui s'efface pendant que la vraie glisse. */
+  .theme-switch { view-transition-name: theme-switch; }
+  ::view-transition-old(theme-switch) { display: none; }
+  ::view-transition-new(theme-switch) { animation: none; }
   .theme-switch[aria-checked="false"] .ts-sun,
   .theme-switch[aria-checked="true"] .ts-moon { stroke: var(--logo-ink); }
 
